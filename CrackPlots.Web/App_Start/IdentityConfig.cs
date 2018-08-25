@@ -10,9 +10,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using CrackPlots.Web.Models;
+using ForeSight.Web.Models;
 
-namespace CrackPlots.Web
+namespace ForeSight.Web
 {
     public class EmailService : IIdentityMessageService
     {
@@ -54,10 +54,8 @@ namespace CrackPlots.Web
             manager.PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 6,
-                RequireNonLetterOrDigit = true,
                 RequireDigit = true,
-                RequireLowercase = true,
-                RequireUppercase = true,
+                RequireLowercase = true
             };
 
             // Configure user lockout defaults

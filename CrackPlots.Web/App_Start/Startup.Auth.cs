@@ -5,9 +5,9 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
-using CrackPlots.Web.Models;
+using ForeSight.Web.Models;
 
-namespace CrackPlots.Web
+namespace ForeSight.Web
 {
     public partial class Startup
     {

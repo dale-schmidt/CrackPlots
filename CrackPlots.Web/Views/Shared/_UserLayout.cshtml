@@ -1,0 +1,264 @@
+﻿@model ForeSight.Web.Models.ViewModels.BaseViewModel
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <link rel="shortcut icon" href="/Assets/images/favicon.png" type="image/x-icon" />    <!-- Favicon -->
+    <link rel="apple-touch-icon-precomposed" href="/Assets/images/apple-touch-icon-57-precomposed.png">	<!-- For iPhone -->
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/Assets/images/apple-touch-icon-114-precomposed.png">    <!-- For iPhone 4 Retina display -->
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/Assets/images/apple-touch-icon-72-precomposed.png">    <!-- For iPad -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/Assets/images/apple-touch-icon-144-precomposed.png">    <!-- For iPad Retina display -->
+    <!-- CORE CSS FRAMEWORK - START -->
+    <link href="/Assets/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="/Assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/Assets/plugins/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
+    <link href="/Assets/fonts/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
+    <link href="/Assets/css/animate.min.css" rel="stylesheet" type="text/css" />
+    <link href="/Assets/plugins/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/textAngular.css" rel="stylesheet" />
+    <!-- CORE CSS FRAMEWORK - END -->
+    <!-- HEADER SCRIPTS INCLUDED ON THIS PAGE - START -->
+
+
+    <link href="/Assets/plugins/jvectormap/jquery-jvectormap-2.0.1.css" rel="stylesheet" type="text/css" media="screen" />
+
+    <!-- HEADER SCRIPTS INCLUDED ON THIS PAGE - END -->
+    <!-- CORE CSS TEMPLATE - START -->
+    <link href="/Assets/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="/Assets/css/responsive.css" rel="stylesheet" type="text/css" />
+    <!-- CORE CSS TEMPLATE - END -->
+    <title>CrackPlots - @ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        a:hover {
+            cursor: pointer;
+        }
+        .main-wrapper {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: rgb(238,238,238);
+        }
+        #main-content {
+            margin-left: 0px;
+            border: 1px solid RGB(25,25,112);
+            padding-bottom: 10px;
+        }
+        .logo-area {
+            text-align: left;
+            padding-left: 10px;
+        }
+        .logo a {
+            color: white;
+            text-decoration: none;
+        }
+        .right-links a {
+            color: white;
+            text-decoration: none;
+        }
+        a > i {
+            cursor: pointer;
+        }
+        li > a {
+            cursor: pointer;
+        }
+        .rich-text-read-only {
+            border: 1px solid RGB(225,225,225);
+            background-color: RGB(238,238,238);
+            border-radius: 5px;
+            min-height: 100px;
+            width: 100%;
+            padding: 8.4px 5.6px;
+        }
+        md-tabs {
+            margin-top:5px;
+        }
+        md-tab-content {
+            /*border: 1px solid #3F51B5;*/
+            padding: 10px 10px;
+            overflow:visible;
+            margin-bottom: 10px;
+        }
+        md-tab-item {
+            border-left: 1px solid white;
+            border-right: 1px solid white;
+        }
+        md-tab-item.md-active {
+            background-color:midnightblue;
+        }
+        md-tab-item:not(.md-active):hover {
+            background-color:lightblue;
+        }
+        md-ink-bar {
+            display:none;
+        }
+        .character-list {
+            list-style: none;
+            padding-left:0;
+        }
+        .center-text {
+            text-align:center;
+        }
+        .form-control {
+            min-width: 100%;
+        }
+        .btn {
+            margin:5px;
+        }
+        md-tab-content {
+            background-color: #c4daff;
+        }
+        md-tab-content md-tab-content {
+            background-color: #93baf9;
+        }
+        md-toast.md-error-toast-theme .md-toast-content {
+            background-color: #ffc4c4;
+            color: #560000;
+        }
+        md-toast.md-success-toast-theme .md-toast-content {
+            background-color: #bfffc4;
+            color: #003804;
+        }
+        #main-content.sidebar_shift {
+            margin-left: 0px;
+        }
+        @@media only screen and (min-width: 769px) {
+            .logo-area {
+                text-align:center;
+            }
+            .notes {
+                height: 173px;
+            }
+        }
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+            display: none !important;
+        }
+    </style>
+    @RenderSection("styles", required: false)
+</head>
+<body>
+    <!-- START TOPBAR -->
+    <div ng-app="myApp">
+        <div ng-controller="topbarController as tVm">
+            <div class='page-topbar ' ng-cloak>
+                <div class='logo-area'>
+                    <h3 class="logo"><a href="/projects">CrackPlots</a></h3>
+                </div>
+                <div class='quick-area'>
+                    <div class='pull-left'>
+                        <ul class="info-menu left-links list-inline list-unstyled"></ul>
+                    </div>
+                    <div class='pull-right'>
+                        <ul class="info-menu right-links list-inline list-unstyled">
+                            <li ng-hide="tVm.razorViewModel.IsLoggedIn"><a href="/account/register">Register</a></li>
+                            <li ng-if="tVm.razorViewModel.IsLoggedIn"><a href="/projects/index">{{tVm.razorViewModel.UserEmail}}</a></li>
+                            <li ng-hide="tVm.razorViewModel.IsLoggedIn"><a href="/account/login">Log In</a></li>
+                            <li id="logout" ng-if="tVm.razorViewModel.IsLoggedIn"><a ng-click="tVm.logout()">Log Out</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- END TOPBAR -->
+        <!-- START CONTAINER -->
+        <div class="page-container row-fluid container-fluid">
+            <div class="col-md-offset-1 col-md-10 col-xs-12">
+                <section id="main-content" class="panel">
+                    <section class="pic-wrapper main-wrapper row">
+                        @RenderBody()
+                    </section>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- END CONTAINER -->
+    <!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
+    <!-- CORE JS FRAMEWORK - START -->
+    <script src="/Assets/js/jquery-1.11.2.min.js" type="text/javascript"></script>
+    <script src="/Assets/js/jquery.easing.min.js" type="text/javascript"></script>
+    <script src="/Assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/Assets/plugins/pace/pace.min.js" type="text/javascript"></script>
+    <script src="/Assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js" type="text/javascript"></script>
+    <script src="/Assets/plugins/viewport/viewportchecker.js" type="text/javascript"></script>
+    <script>window.jQuery || document.write('<script src="/Assets/js/jquery-1.11.2.min.js"><\/script>');</script>
+    <!-- CORE JS FRAMEWORK - END -->
+    <!-- OTHER SCRIPTS INCLUDED ON THIS PAGE - START -->
+
+    <!-- OTHER SCRIPTS INCLUDED ON THIS PAGE - END -->
+    <!-- CORE TEMPLATE JS - START -->
+    <script src="/Assets/js/scripts.js" type="text/javascript"></script>
+    <!-- END CORE TEMPLATE JS - END -->
+    <script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
+    <script src="/signalr/hubs"></script>
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/angular-animate.min.js"></script>
+    <script src="~/Scripts/angular-aria.min.js"></script>
+    <script src="~/Scripts/angular-material.min.js"></script>
+    <script src="~/Scripts/textAngular-rangy.min.js"></script>
+    <script src="~/Scripts/textAngular-sanitize.min.js"></script>
+    <script src="~/Scripts/textAngular.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            "use strict";
+            angular.module('myApp', ['ngMaterial', 'ngSanitize', 'textAngular']);
+        })();
+
+        (function () {
+            "use strict";
+            angular.module('myApp')
+                .value('razorViewModel', @Html.Raw(Json.Encode(Model)))
+        })();
+
+        (function () {
+            "use strict";
+            angular.module('myApp')
+                .config(function ($mdThemingProvider) {
+                    $mdThemingProvider.theme('error-toast');
+                    $mdThemingProvider.theme('success-toast');
+                });
+        })();
+
+        (function () {
+            angular.module('myApp')
+                .controller('topbarController', TopbarController);
+
+            TopbarController.$inject = ["$http", "$window", "razorViewModel"];
+
+            function TopbarController($http, $window, razorViewModel) {
+                var vm = this;
+                vm.$http = $http;
+                vm.$window = $window;
+                vm.razorViewModel = razorViewModel;
+
+                vm.logout = _logout;
+
+                function _logout() {
+                    var url = '/api/users/logout';
+                    vm.$http.get(url)
+                        .then(_logoutSuccess, _logoutError);
+                }
+
+                function _logoutSuccess(resp) {
+                    vm.$window.location.href = '/';
+                }
+
+                function _logoutError(resp) {
+                    console.log(resp);
+                }
+            }
+        })();
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

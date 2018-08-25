@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace CrackPlots.Web.Models
+namespace ForeSight.Web.Models
 {
     public class ExternalLoginConfirmationViewModel
     {

@@ -1,41 +1,111 @@
-﻿@model CrackPlots.Web.Models.RegisterViewModel
-@{
+﻿@{
     ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
-<h2>@ViewBag.Title.</h2>
+@section Styles {
+    <style>
+        hr {
+            border: 0;
+            clear: both;
+            display: block;
+            width: 100%;
+            background-color: lightgray;
+            height: 1px;
+        }
+    </style>
+    }
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
+<div ng-controller="registerController as rVm">
+    <h2>Register</h2>
+
+
     <h4>Create a new account.</h4>
     <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        <div class="row">
+            <div class="col-xs-12">
+                <label>Email</label>
+                <input type="text" class="form-control" id="email" ng-model="rVm.user.email" ng-enter="rVm.submit()" />
+            </div>
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+        <div class="row">
+            <div class="col-xs-12">
+                <label>Password</label>
+                <input type="password" class="form-control" id="password" ng-model="rVm.user.password" ng-enter="rVm.submit()" />
+            </div>
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+        <div class="row">
+            <div class="col-xs-12">
+                <label>Confirm Password</label>
+                <input type="password" class="form-control" id="confirmPassword" ng-model="rVm.user.confirmPassword" ng-enter="rVm.submit()" />
+            </div>
         </div>
     </div>
+    <hr />
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
+        <div class="row">
+            <div class="col-xs-12">
+                <button type="button" class="btn btn-primary" id="submit" ng-click="rVm.submit()" ng-disabled="rVm.submitted">Submit</button>
+            </div>
         </div>
     </div>
-}
+</div>
+
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/Directives/NgEnter.js"></script>
+
+    <script type="text/javascript">
+        (function () {
+            "use strict";
+            angular.module('myApp')
+                .controller('registerController', RegisterController);
+
+            RegisterController.$inject = ['$http', '$window'];
+
+            function RegisterController($http, $window) {
+                var vm = this;
+                vm.$http = $http;
+                vm.$window = $window;
+
+                vm.user = null;
+                vm.submitted = false;
+
+                vm.submit = _submit;
+
+                function _submit() {
+                    if (vm.user.password && vm.user.email) {
+                        if (vm.user.password === vm.user.confirmPassword) {
+                            if (vm.user.password.match(/^(?=.*[a-z])(?=.*\d)[A-Za-z\d$@@$!%*?&]{6,}/)) {
+                                vm.submitted = true;
+                                var url = '/api/users';
+                                vm.$http.post(url, vm.user)
+                                    .then(_submitSuccess, _submitError);
+                            } else {
+                                alert("Password must be at least 6 characters and contain at least one lowercase letter and one digit.");
+                            }
+                        } else {
+                            alert("Passwords must match");
+                        }
+                    } else {
+                        alert("Must enter email and password");
+                    }
+                }
+
+                function _submitSuccess(resp) {
+                    vm.$window.location.href = '/';
+                }
+
+                function _submitError(resp) {
+                    vm.submitted = false;
+                    console.log(resp);
+                }
+            }
+        })();
+    </script>
 }

@@ -6,9 +6,9 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using CrackPlots.Web.Models;
+using ForeSight.Web.Models;
 
-namespace CrackPlots.Web.Controllers
+namespace ForeSight.Web.Controllers
 {
     [Authorize]
     public class ManageController : Controller

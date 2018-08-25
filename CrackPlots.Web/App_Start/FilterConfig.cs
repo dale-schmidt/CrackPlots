@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace CrackPlots.Web
+namespace ForeSight.Web
 {
     public class FilterConfig
     {
