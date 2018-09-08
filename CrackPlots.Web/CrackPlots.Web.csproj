@@ -2308,6 +2308,7 @@
     <Content Include="Content\angular-material.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\main.css" />
     <Content Include="Content\textAngular.css" />
     <Content Include="Content\ui-bootstrap-csp.css" />
     <Content Include="favicon.ico" />
@@ -2437,6 +2438,11 @@
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="Scripts\angular-sanitize.min.js.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Controllers\projectActController.js" />
+    <Content Include="Scripts\Controllers\projectEditController.js" />
+    <Content Include="Scripts\Controllers\projectEpisodeController.js" />
+    <Content Include="Scripts\Controllers\projectIndexController.js" />
+    <Content Include="Scripts\Controllers\projectTVController.js" />
     <Content Include="Scripts\Directives\NgEnter.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

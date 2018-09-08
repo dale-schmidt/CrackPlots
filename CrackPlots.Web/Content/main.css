@@ -1,0 +1,204 @@
+﻿a:hover {
+    cursor: pointer;
+}
+
+a {
+    color:black;
+}
+
+/*      Body        */
+.main-wrapper {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+body {
+    background-color: rgb(238,238,238);
+}
+
+#main-content {
+    margin-left: 0px;
+    border: 1px solid RGB(25,25,112);
+    padding-bottom: 10px;
+}
+
+/*      Top Bar        */
+.logo-area {
+    text-align: center;
+    padding-left: 10px;
+}
+
+.logo a {
+    color: white;
+    text-decoration: none;
+}
+
+.left-links {
+    color: white;
+}
+
+.right-links a {
+    color: white;
+    text-decoration: none;
+}
+
+/*      Tabs      */
+md-tabs {
+    margin-top: 5px;
+}
+
+md-tab-content {
+    padding: 10px 10px;
+    overflow: visible;
+    margin-bottom: 10px;
+    background-color: #c4daff;
+}
+
+md-tab-item {
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+}
+
+md-tab-item.md-active {
+    background-color: midnightblue;
+}
+
+md-tab-item:not(.md-active):hover {
+    background-color: lightblue;
+}
+
+md-tab-content md-tab-content {
+    background-color: #93baf9;
+}
+
+md-ink-bar {
+    display: none;
+}
+
+uib-tab {
+    background-color: rgb(63,81,181);
+    border-color: rgb(63,81,181);
+    border-style: solid;
+    border-width: 1px;
+}
+
+uib-tab.active {
+    background-color: white;
+    border-bottom-color: rgb(221,221,221);
+}
+
+/*      Nav Bar     */
+.md-nav-item {
+    text-align: center;
+}
+
+._md-nav-button {
+    width: 100%;
+}
+
+._md-nav-button.md-active {
+    background-color: lightblue;
+}
+
+#sceneNavBar {
+    display: none;
+}
+
+/*      Toasters        */
+md-toast.md-error-toast-theme .md-toast-content {
+    background-color: #ffc4c4;
+    color: #560000;
+}
+
+md-toast.md-success-toast-theme .md-toast-content {
+    background-color: #bfffc4;
+    color: #003804;
+}
+
+/*      Modals      */
+.center-modal {
+    display: block;
+}
+
+.modal {
+    position: fixed;
+    top: 0px;
+    /*left: auto;*/
+    right: auto;
+}
+
+/*      Buttons     */
+#editButton {
+    margin-top: 15px;
+}
+
+.btn {
+    margin: 5px;
+}
+
+.titleButton {
+    margin: 22px 5px 7px 5px;
+}
+
+/*      Other       */
+#titleInput {
+    font-size: 28px;
+    line-height: 34px;
+    margin: 20px 0px 15px 0px;
+    color: rgba(118, 118, 118, 1.0);
+}
+
+#main-content.sidebar_shift {
+    margin-left: 0px;
+}
+
+.character-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.form-control {
+    min-width: 100%;
+    margin: 5px;
+}
+
+h1.title {
+    display: inline-block;
+    margin: 22px 0px 7px 0px;
+}
+
+.panel {
+    padding: 5px;
+    background-color: transparent;
+}
+
+.wordCount {
+    float: right;
+    margin: 10px 5px;
+}
+
+@media only screen and (min-width: 769px) {
+    .logo-area {
+        text-align: center;
+    }
+
+    .notes {
+        height: 173px;
+    }
+
+    #sceneNavBar {
+        display: inline;
+    }
+
+    #mobileSceneSelector {
+        display: none;
+    }
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
