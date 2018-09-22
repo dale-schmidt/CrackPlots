@@ -23,24 +23,51 @@ body {
 }
 
 /*      Top Bar        */
+.page-topbar, .page-topbar a {
+    color:white;
+}
 .logo-area {
     text-align: center;
-    padding-left: 10px;
 }
 
 .logo a {
-    color: white;
     text-decoration: none;
-}
-
-.left-links {
-    color: white;
 }
 
 .right-links a {
-    color: white;
     text-decoration: none;
 }
+
+.topbar-save {
+    text-align: center;
+    padding-top:20px;
+}
+
+.topbar-center {
+    text-align: center;
+    display: inline-block;
+    padding-top: 20px;
+}
+.topbar-left-arrow {
+    text-align: right;
+    display: inline-block;
+    padding-top: 20px;
+}
+.topbar-right-arrow {
+    text-align: left;
+    display: inline-block;
+    padding-top: 20px;
+}
+
+.topbar-right {
+    text-align: right;
+    padding-top: 20px;
+}
+
+.page-topbar.row {
+    margin:0px;
+}
+
 
 /*      Tabs      */
 md-tabs {

@@ -253,6 +253,17 @@ namespace ForeSight.Web.Services
 
                     while (reader.Read())
                     {
+                        int i = reader.GetSafeInt32(0);
+                        if(proj.EpisodeIds == null)
+                        {
+                            proj.EpisodeIds = new List<int>();
+                        }
+                        proj.EpisodeIds.Add(i);
+                    }
+                    reader.NextResult();
+
+                    while (reader.Read())
+                    {
                         Plot p = MapPlot(reader);
                         if (proj.Plots == null)
                         {

@@ -9,6 +9,8 @@ namespace ForeSight.Web.Domain
     {
         public int Id { get; set; }
         public int ProjectId { get; set; }
+        public string ProjectTitle { get; set; }
+        public List<int> ActIds { get; set; }
         public int StoryTypeId { get; set; }
         public string Title { get; set; }
         public string Summary { get; set; }

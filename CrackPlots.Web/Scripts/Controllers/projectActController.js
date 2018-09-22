@@ -349,6 +349,8 @@
                 angular.element('#sceneNavBar > div > nav > ul > li:nth-child(1) > button').triggerHandler('click');
             });
             _setWatches();
+            vm.$rootScope.$broadcast('show-title', vm.act.projectTitle, vm.act.projectId);
+            vm.$rootScope.$broadcast('show-arrows', 'acts', vm.act.id, vm.act.actIds);
         }
 
         function _getActError(resp) {

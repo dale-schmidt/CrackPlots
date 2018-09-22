@@ -148,6 +148,8 @@
             vm.$timeout(function () {
                 angular.element('#sceneNavBar > div > nav > ul > li:nth-child(1) > button').triggerHandler('click');
             });
+            vm.$rootScope.$broadcast('show-title', vm.project.title, vm.project.id);
+            vm.$rootScope.$broadcast('show-arrows', 'episode', vm.project.id, vm.project.episodeIds);
         }
 
         function _getProjectError(resp) {

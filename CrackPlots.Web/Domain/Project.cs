@@ -21,5 +21,6 @@ namespace ForeSight.Web.Domain
         public List<Project> Episodes { get; set; }
         public List<Plot> Plots { get; set; }
         public List<Person> Users { get; set; }
+        public List<int> EpisodeIds { get; set; }
     }
 }

@@ -188,6 +188,7 @@
             }
             vm.wordCount.actSummary = _wordCount(vm.project.acts[0].summary);
             _setWatches();
+            vm.$rootScope.$broadcast('show-title', vm.project.title, vm.project.id);
         }
 
         function _getProjectError(resp) {

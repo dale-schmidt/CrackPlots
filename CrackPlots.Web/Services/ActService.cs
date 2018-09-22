@@ -104,6 +104,17 @@ namespace ForeSight.Web.Services
                     }
                     reader.NextResult();
 
+                    while (reader.Read())
+                    {
+                        int i = reader.GetSafeInt32(0);
+                        if (act.ActIds == null)
+                        {
+                            act.ActIds = new List<int>();
+                        }
+                        act.ActIds.Add(i);
+                    }
+                    reader.NextResult();
+
                     while(reader.Read())
                     {
                         Sequence seq = MapSequence(reader);
@@ -189,6 +200,7 @@ namespace ForeSight.Web.Services
 
             act.Id = reader.GetSafeInt32(ord++);
             act.ProjectId = reader.GetSafeInt32(ord++);
+            act.ProjectTitle = reader.GetSafeString(ord++);
             act.StoryTypeId = reader.GetSafeInt32(ord++);
             act.Title = reader.GetSafeString(ord++);
             act.Summary = reader.GetSafeString(ord++);
