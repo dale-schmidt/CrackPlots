@@ -7,6 +7,9 @@ a {
 }
 
 /*      Body        */
+html, body {
+    width: 100%;
+}
 .main-wrapper {
     margin-left: 0px;
     margin-right: 0px;
@@ -27,7 +30,10 @@ body {
     color:white;
 }
 .logo-area {
-    text-align: center;
+    text-align: left;
+    float:left;
+    width:20%;
+    padding-left:75px;
 }
 
 .logo a {
@@ -47,21 +53,31 @@ body {
     text-align: center;
     display: inline-block;
     padding-top: 20px;
+    width:60%;
+    float:left;
 }
-.topbar-left-arrow {
+.topbar-previous {
     text-align: right;
     display: inline-block;
-    padding-top: 20px;
+    width:33%;
 }
-.topbar-right-arrow {
+.topbar-title {
+    text-align: center;
+    display: inline-block;
+    width: 33%;
+}
+.topbar-next {
     text-align: left;
     display: inline-block;
-    padding-top: 20px;
+    width: 33%;
 }
 
 .topbar-right {
     text-align: right;
-    padding-top: 20px;
+    padding: 20px 20px 0 0;
+    float: left;
+    min-width:20%;
+    overflow-x:visible;
 }
 
 .page-topbar.row {
@@ -209,10 +225,6 @@ h1.title {
 }
 
 @media only screen and (min-width: 769px) {
-    .logo-area {
-        text-align: center;
-    }
-
     .notes {
         height: 173px;
     }

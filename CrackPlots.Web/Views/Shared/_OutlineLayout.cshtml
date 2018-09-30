@@ -42,34 +42,26 @@
 <body>
     <!-- START TOPBAR -->
     <div ng-app="myApp">
-        <div ng-controller="topbarController as tVm" class="container-fluid">
-            <div class='page-topbar row' ng-cloak>
-                <div class='logo-area col-md-2'>
+        <div ng-controller="topbarController as tVm">
+            <div class='page-topbar' ng-cloak>
+                <div class='logo-area'>
                     <h3 class="logo"><a href="/projects">CrackPlots</a></h3>
                 </div>
-                <div class='topbar-save col-md-1'>
-                    <ul class="info-menu left-links list-inline list-unstyled">
-                        <li ng-if="!tVm.saving"><i class="fas fa-save"></i> Saved</li>
-                        <li ng-if="tVm.saving"><i class="fas fa-broadcast-tower"></i> Saving...</li>
-                    </ul>
+                <div class="topbar-center">
+                    <div class="topbar-previous">
+                        <a ng-show="tVm.showLeftArrow" ng-href="{{tVm.leftArrowLink}}"><i class="fas fa-chevron-circle-left"></i> {{tVm.leftArrowText}}</a>
+                    </div>
+                    <div class="topbar-title">
+                        <a ng-show="tVm.showTitle" ng-href="/projects/edit/{{tVm.projectId}}">{{tVm.projectTitle}}</a>
+                    </div>
+                    <div class="topbar-next">
+                        <a ng-show="tVm.showRightArrow" ng-href="{{tVm.rightArrowLink}}">{{tVm.rightArrowText}} <i class="fas fa-chevron-circle-right"></i></a>
+                    </div>
                 </div>
-                <div class="topbar-left-arrow col-md-2">
-                    <span ng-if="tVm.showLeftArrow" class="topbarPrevious">
-                        <a ng-href="{{tVm.leftArrowLink}}"><i class="fas fa-chevron-circle-left"></i> {{tVm.leftArrowText}}</a>
-                    </span>
-                </div>
-                <div class="topbar-center col-md-2">
-                    <span ng-if="tVm.showTitle" class="topbarTitle">
-                        <a ng-href="/projects/edit/{{tVm.projectId}}">{{tVm.projectTitle}}</a>
-                    </span>
-                </div>
-                <div class="topbar-right-arrow col-md-2">
-                    <span ng-if="tVm.showRightArrow" class="topbarNext">
-                        <a ng-href="{{tVm.rightArrowLink}}">{{tVm.rightArrowText}} <i class="fas fa-chevron-circle-right"></i></a>
-                    </span>
-                </div>
-                <div class='topbar-right col-md-3'>
+                <div class='topbar-right'>
                     <ul class="info-menu right-links list-inline list-unstyled">
+                        <li ng-if="!tVm.saving"><i class="fas fa-save" title="Saved"></i></li>
+                        <li ng-if="tVm.saving"><i class="fas fa-broadcast-tower" title="Saving..."></i></li>
                         <li ng-hide="tVm.razorViewModel.IsLoggedIn"><a href="/account/register">Register</a></li>
                         <li ng-if="tVm.razorViewModel.IsLoggedIn"><a href="/projects/index">{{tVm.razorViewModel.UserEmail}}</a></li>
                         <li ng-hide="tVm.razorViewModel.IsLoggedIn"><a href="/account/login">Log In</a></li>
