@@ -274,7 +274,7 @@
 
         // Collaborator functions
         function _openCollaboratorEdit() {
-            vm.editCollborator = true;
+            vm.editCollaborator = true;
         }
 
         function _saveCollaborator() {

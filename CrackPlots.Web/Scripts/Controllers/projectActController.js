@@ -254,10 +254,10 @@
                     scene: false,
                     character: false
                 };
-                Object.keys(vm.edit).forEach(function (key, index) {
+                Object.keys(vm.act).forEach(function (key, index) {
                     var count = 0;
-                    Object.keys(vm.edit[key]).forEach(function (key2, index2) {
-                        if (vm.edit[key][key2] && key2 != 'save') {
+                    Object.keys(vm.act[key]).forEach(function (key2, index2) {
+                        if (vm.act[key][key2] && key2 != 'save') {
                             switch (key) {
                                 case 'act':
                                     camelAct[key2] = vm.act[key2];

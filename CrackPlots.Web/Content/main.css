@@ -6,6 +6,10 @@ a {
     color:black;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    color: rgb(80,80,80);
+}
+
 /*      Body        */
 html, body {
     width: 100%;
@@ -15,25 +19,27 @@ html, body {
     margin-right: 0px;
 }
 
-body {
-    background-color: rgb(238,238,238);
+body, .container-fluid {
+    background-color: rgb(240,240,255);
 }
 
 #main-content {
+    background-color: rgb(210,210,255);
     margin-left: 0px;
-    border: 1px solid RGB(25,25,112);
     padding-bottom: 10px;
 }
 
 /*      Top Bar        */
 .page-topbar, .page-topbar a {
     color:white;
+    background: rgb(75,75,225);
 }
-.logo-area {
+.page-topbar .logo-area {
+    background: rgb(75,75,225);
     text-align: left;
-    float:left;
-    width:20%;
-    padding-left:75px;
+    float: left;
+    width: 20%;
+    padding-left: 75px;
 }
 
 .logo a {
@@ -90,28 +96,35 @@ md-tabs {
     margin-top: 5px;
 }
 
+md-tabs.md-default-theme.md-hue-1.md-primary > md-tabs-wrapper, md-tabs.md-hue-1.md-primary > md-tabs-wrapper {
+    background-color: rgb(210,210,255);
+}
+
 md-tab-content {
     padding: 10px 10px;
     overflow: visible;
     margin-bottom: 10px;
-    background-color: #c4daff;
+    background-color: rgb(150,150,255);
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
 }
 
 md-tab-item {
-    border-left: 1px solid white;
-    border-right: 1px solid white;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    background-color: rgb(125,125,225);
 }
 
 md-tab-item.md-active {
-    background-color: midnightblue;
+    background-color: rgb(45,45,145);
 }
 
 md-tab-item:not(.md-active):hover {
-    background-color: lightblue;
+    background-color: rgb(100,100,175);
 }
 
 md-tab-content md-tab-content {
-    background-color: #93baf9;
+    background-color: rgb(125,125,255);
 }
 
 md-ink-bar {
@@ -135,15 +148,29 @@ uib-tab.active {
     text-align: center;
 }
 
-._md-nav-button {
-    width: 100%;
+.md-button.md-default-theme.md-accent, .md-button.md-accent {
+    color: rgb(75,75,225);
 }
 
-._md-nav-button.md-active {
-    background-color: lightblue;
+._md-nav-button {
+    width: 100%;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+}
+
+.md-nav-item ._md-nav-button:hover {
+    background-color: rgb(175,175,255);
+}
+
+._md-nav-button.md-active, ._md-nav-button.md-active:hover {
+    background-color: rgb(210,210,255);
 }
 
 #sceneNavBar {
+    display: none;
+}
+
+md-nav-ink-bar {
     display: none;
 }
 
@@ -183,16 +210,97 @@ md-toast.md-success-toast-theme .md-toast-content {
     margin: 22px 5px 7px 5px;
 }
 
-/*      Other       */
-#titleInput {
-    font-size: 28px;
-    line-height: 34px;
-    margin: 20px 0px 15px 0px;
-    color: rgba(118, 118, 118, 1.0);
+/*      Inputs      */
+
+input.form-control {
+    border-radius: 16px;
+    background-color: rgb(210,210,255);
+    border:none;
 }
 
+input.form-control:hover, input.form-control:focus {
+    outline: none;
+    background-color: rgb(240,240,255);
+}
+
+md-tab-content .form-control {
+    color: rgb(40,40,40);
+}
+
+#titleInput {
+    font-size: 36px;
+    line-height: 34px;
+    min-width: 75%;
+    margin: 20px 0px 15px 0px;
+    color: rgba(80,80,80,1.0);
+    border-radius: 21px;
+    border: none;
+    padding: 6px 12px;
+    background-color: rgb(210,210,255);
+}
+
+input.centralQuestion {
+    font-size: 28px;
+    line-height: 34px;
+    background-color: rgb(210,210,255);
+    color: rgb(80,80,80);
+}
+
+md-tab-content input.centralQuestion {
+    color: rgb(40,40,40);
+}
+
+input.centralQuestion:hover, input.centralQuestion:focus {
+    outline: none;
+    background-color: rgb(240,240,255);
+}
+
+md-tab-content input.centralQuestion {
+    background-color: rgb(150,150,255);
+}
+md-tab-content input.centralQuestion:hover, md-tab-content input.centralQuestion:focus {
+    outline: none;
+    background-color: rgb(210,210,255);
+}
+
+#titleInput:hover, #titleInput:focus {
+    outline: none;
+    background-color: rgb(240,240,255);
+}
+
+div.ta-text.ta-editor {
+    border: none;
+    border-radius: 16px;
+    background-color: rgb(210,210,255);
+}
+
+div.ta-text.ta-editor:hover, div.ta-text.ta-editor:focus {
+    outline: none;
+    background-color: rgb(240,240,255);
+}
+
+md-tab-content div.ta-text.ta-editor, md-tab-content input.form-control {
+    border: none;
+    border-radius: 16px;
+    background-color: rgb(150,150,255);
+}
+
+md-tab-content div.ta-text.ta-editor:hover, md-tab-content div.ta-text.ta-editor:focus, md-tab-content input.form-control:hover, md-tab-content input.form-control:focus {
+    outline: none;
+    background-color: rgb(210,210,255);
+}
+
+/*      Other       */
 #main-content.sidebar_shift {
     margin-left: 0px;
+}
+
+.loglineLabel, .notesLabel, div.btn-toolbar, .centralQuestionLabel, .summaryLabel, .conflictLabel, .turnLabel, .settingLabel {
+    padding-left: 17px;
+}
+
+md-tab-content .loglineLabel, md-tab-content .notesLabel, md-tab-content div.btn-toolbar, md-tab-content .centralQuestionLabel, md-tab-content .summaryLabel, md-tab-content .conflictLabel, md-tab-content .turnLabel, md-tab-content .settingLabel {
+    color: rgb(40,40,40);
 }
 
 .character-list {

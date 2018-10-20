@@ -12,29 +12,25 @@
         <div class="page-title" ng-cloak>
             <div class="center-text"><h1 class="title" ng-hide="aVm.edit.act.title">ACT {{aVm.act.title}}</h1></div>
             <div class="row">
+                <div class="col-xs-12">
+                    <h3 class="centralQuestionLabel">Central Question:</h3>
+                    <input type="text" ng-model="aVm.act.centralQuestion" class="form-control centralQuestion" />
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-xs-12 col-sm-8">
                     <div class="row">
-                        <div class="col-xs-12">
-                            <h4>Central Question:</h4>
-                            <input type="text" ng-model="aVm.act.centralQuestion" class="form-control" />
+                        <div class="col-xs-6">
+                            <h3 class="summaryLabel">Summary:</h3>
+                        </div>
+                        <div class="col-xs-6">
+                            <span class="wordCount">Word count: {{aVm.wordCount.actSummary}}</span>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="row">
-                                <div class="col-xs-6">
-                                    <h4>Summary:</h4>
-                                </div>
-                                <div class="col-xs-6">
-                                    <span class="wordCount">Word count: {{aVm.wordCount.actSummary}}</span>
-                                </div>
-                            </div>
-                            <div><text-angular ng-model="aVm.act.summary"></text-angular></div>
-                        </div>
-                    </div>
+                    <div><text-angular ng-model="aVm.act.summary"></text-angular></div>
                 </div>
                 <div class="col-xs-12 col-sm-4">
-                    <h4>Notes:</h4>
+                    <h3 class="notesLabel">Notes:</h3>
                     <div><text-angular ng-model="aVm.act.notes"></text-angular></div>
                 </div>
             </div>
@@ -46,29 +42,25 @@
         <md-tabs md-stretch-tabs="always" md-selected="aVm.activeSequence" md-dynamic-height="true" id="sequenceTabs" class="md-primary md-hue-1">
             <md-tab ng-repeat="sequence in aVm.act.sequences" label="{{sequence.title}}" md-on-select="aVm.sequenceChange(sequence)" ng-cloak>
                 <div class="row">
+                    <div class="col-xs-12">
+                        <h3 class="centralQuestionLabel">Central Question:</h3>
+                        <input type="text" ng-model="sequence.centralQuestion" class="form-control centralQuestion" />
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-xs-12 col-sm-8">
                         <div class="row">
-                            <div class="col-xs-12">
-                                <h4>Central Question:</h4>
-                                <input type="text" ng-model="sequence.centralQuestion" class="form-control" />
+                            <div class="col-xs-6">
+                                <h3 class="summaryLabel">Summary:</h3>
+                            </div>
+                            <div class="col-xs-6">
+                                <span class="wordCount">Word count: {{aVm.wordCount.sequenceSummary}}</span>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="row">
-                                    <div class="col-xs-6">
-                                        <h4>Summary:</h4>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <span class="wordCount">Word count: {{aVm.wordCount.sequenceSummary}}</span>
-                                    </div>
-                                </div>
-                                <div><text-angular ng-model="sequence.summary"></text-angular></div>
-                            </div>
-                        </div>
+                        <div><text-angular ng-model="sequence.summary"></text-angular></div>
                     </div>
                     <div class="col-xs-12 col-sm-4">
-                        <h4>Notes:</h4>
+                        <h3 class="notesLabel">Notes:</h3>
                         <div><text-angular ng-model="sequence.notes"></text-angular></div>
                     </div>
                 </div>
@@ -82,7 +74,7 @@
                         <h4>Scenes: <a ng-click="aVm.openSceneAdd(sequence.id)"><i class="fa fa-plus-circle"></i></a></h4>
                         <p ng-if="aVm.add.scene">Add new scene after which scene?</p>
                         <select ng-if="aVm.add.scene" ng-options="scene.title for scene in aVm.scenes track by scene.id" ng-model="aVm.selectedScene"></select>
-                        <button ng-if="aVm.add.scene" type="button" class="btn btn-primary" ng-click="aVm.addScene(sequence.id)"">Add</button>
+                        <button ng-if="aVm.add.scene" type="button" class="btn btn-primary" ng-click="aVm.addScene(sequence.id)" ">Add</button>
                         <md-nav-bar id="sceneNavBar">
                             <md-nav-item ng-repeat="scene in sequence.scenes" md-nav-click="aVm.selectScene(scene, sequence.scenes.length)" ng-style="{'width': aVm.navButtonWidth}">{{scene.title}}</md-nav-item>
                         </md-nav-bar>
@@ -91,7 +83,7 @@
                             <div class="col-xs-12">
                                 <div class="row">
                                     <div class="col-xs-6">
-                                        <h4>Summary:</h4>
+                                        <h4 class="summaryLabel">Summary:</h4>
                                     </div>
                                     <div class="col-xs-6">
                                         <span class="wordCount">Word count: {{aVm.wordCount.sceneSummary}}</span>
@@ -102,17 +94,17 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-12 col-sm-6">
-                                <h5>Conflict:</h5>
+                                <h5 class="conflictLabel">Conflict:</h5>
                                 <div><text-angular ng-model="aVm.scene.conflict"></text-angular></div>
                             </div>
                             <div class="col-xs-12 col-sm-6">
-                                <h5>Turn:</h5>
+                                <h5 class="turnLabel">Turn:</h5>
                                 <div><text-angular ng-model="aVm.scene.turn"></text-angular></div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-xs-12">
-                                <h4>Setting:</h4>
+                                <h4 class="settingLabel">Setting:</h4>
                                 <input type="text" ng-model="aVm.scene.setting" class="form-control" />
                             </div>
                         </div>
