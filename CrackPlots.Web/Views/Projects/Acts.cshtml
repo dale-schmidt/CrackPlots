@@ -35,7 +35,7 @@
                 </div>
             </div>
         </div>
-        <h4>Sequences: <a ng-click="aVm.openSequenceAdd()"><i class="fa fa-plus-circle"></i></a></h4>
+        <h3>Sequences: <a ng-click="aVm.openSequenceAdd()"><i class="fa fa-plus-circle"></i></a></h3>
         <p ng-if="aVm.add.sequence">Add new sequence after which sequence?</p>
         <select ng-if="aVm.add.sequence" ng-options="sequence.title for sequence in aVm.sequences track by sequence.id" ng-model="aVm.selectedSequence"></select>
         <button ng-if="aVm.add.sequence" type="button" class="btn btn-primary" ng-click="aVm.addSequence()">Add</button>
