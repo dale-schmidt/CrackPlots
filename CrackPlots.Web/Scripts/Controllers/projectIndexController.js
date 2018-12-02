@@ -25,21 +25,21 @@
             headers: {
                 'Content-Type': 'application/json'
             }
-        }
+        };
         vm.postConfig = {
             method: 'POST',
             url: '/api/projects',
             headers: {
                 'Content-Type': 'application/json'
             }
-        }
+        };
         vm.getStoryTypeConfig = {
             method: 'GET',
             url: '/api/storytypes/',
             headers: {
                 'Content-Type': 'application/json'
             }
-        }
+        };
 
         vm.openProjectAdd = _openProjectAdd;
         vm.openProject = _openProject;
@@ -82,6 +82,7 @@
                             resp.data.items[i].link = '/projects/tv/' + resp.data.items[i].id;
                             break;
                     }
+                    resp.data.items[i].dateModified = new Date(resp.data.items[i].dateModified).toDateString();
                 }
             }
             vm.projects = resp.data.items;
