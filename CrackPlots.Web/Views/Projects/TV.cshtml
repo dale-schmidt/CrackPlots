@@ -15,7 +15,7 @@
                     <input id="titleInput" ng-model="tVm.series.title" type="text" />
                     <button type="button" class="btn btn-primary pull-right titleButton" ng-click="tVm.saveSeries()" ng-if="tVm.edit.series.save" ng-disabled="tVm.edit.saving">Save Project</button>
                 </div>
-                <h1 class="title"><small>{{tVm.series.storyType.name}}</small></h1>
+                <h1><small>{{tVm.series.storyType.name}}</small></h1>
                 <h4>Logline:</h4>
                 <input class="form-control" ng-model="tVm.series.logline" type="text" />
                 <h4>Notes:</h4>
@@ -33,12 +33,12 @@
             </div>
         </div>
     </div>
+    <h1>Seasons:</h1>
     <hr />
 
     <div ng-repeat="season in tVm.series.seasons" ng-cloak>
 
-        <h1 class="title"><small>{{season.title}}</small></h1>
-        <h1 class="title"><small>Episodes</small></h1>
+        <h3>{{season.title}}</h3>
         <div class="row">
             <div class="col-md-8">
                 <div ng-repeat="episode in season.episodes">

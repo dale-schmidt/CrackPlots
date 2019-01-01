@@ -31,6 +31,10 @@ body, .container-fluid {
     border-bottom-right-radius: 20px;
 }
 
+.controller {
+    width:100%;
+}
+
 /*      Buttons        */
 
 button.btn.btn-primary {
@@ -42,11 +46,11 @@ button.btn.btn-primary:hover {
 }
 
 button.btn.btn-danger {
-    background-color: rgb(255,80,80);
+    background-color: rgb(255,80,130);
 }
 
 button.btn.btn-danger:hover {
-    background-color: rgb(255,60,60);
+    background-color: rgb(255,60,110);
 }
 
 /*      Top Bar        */
@@ -399,6 +403,7 @@ h1.title {
 .wordCount {
     float: right;
     margin: 10px 5px;
+    vertical-align:baseline;
 }
 
 @media only screen and (min-width: 769px) {

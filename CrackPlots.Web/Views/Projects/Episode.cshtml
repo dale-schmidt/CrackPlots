@@ -15,9 +15,9 @@
                     <a type="button" class="btn btn-default pull-right titleButton" ng-href="/projects/print/{{pVm.project.id}}" id="printButton" target="_blank"><i class="fa fa-print"></i> Print View</a>
                 </div>
                 <h1 class="title"><small>{{pVm.project.storyType.name}}</small></h1>
-                <h4>Logline:</h4>
+                <h3>Logline:</h3>
                 <input class="form-control" ng-model="pVm.project.logline" type="text" />
-                <h4>Notes:</h4>
+                <h3>Notes:</h3>
                 <div><text-angular ng-model="pVm.project.notes" class="trix-content"></text-angular></div>
             </div>
         </div>
@@ -49,40 +49,36 @@
     </div>
     <button type="button" class="btn btn-default" ng-click="pVm.addPlot()" ng-disabled="pVm.edit.saving">Add Subplot</button>
     <hr ng-if="pVm.project.storyType.id == 6" ng-cloak />
-    <h1 class="title"><small>Acts</small></h1>
+    <h3>Acts</h3>
     <md-tabs md-stretch-tabs="always" md-dynamic-height="true" class="md-primary md-hue-1" md-no-pagination="true">
         <md-tab ng-repeat="act in pVm.project.acts" label="{{act.title}}" md-on-select="pVm.setAct(act)" ng-cloak>
             <div class="row">
+                <div class="col-xs-12">
+                    <h3 class="centralQuestionLabel">Central Question:</h3>
+                    <input type="text" ng-model="act.centralQuestion" class="form-control centralQuestion" />
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-xs-12 col-sm-8">
                     <div class="row">
-                        <div class="col-xs-12">
-                            <h4>Central Question:</h4>
-                            <input type="text" ng-model="act.centralQuestion" class="form-control" />
+                        <div class="col-xs-6">
+                            <h3 class="summaryLabel">Summary:</h3>
+                        </div>
+                        <div class="col-xs-6">
+                            <span class="wordCount">Word count: {{pVm.wordCount.actSummary}}</span>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="row">
-                                <div class="col-xs-6">
-                                    <h4>Summary:</h4>
-                                </div>
-                                <div class="col-xs-6">
-                                    <span class="wordCount">Word count: {{pVm.wordCount.actSummary}}</span>
-                                </div>
-                            </div>
-                            <div><text-angular ng-model="act.summary"></text-angular></div>
-                        </div>
-                    </div>
+                    <div><text-angular ng-model="act.summary"></text-angular></div>
                 </div>
                 <div class="col-xs-12 col-sm-4">
-                    <h4>Notes:</h4>
+                    <h3 class="notesLabel">Notes:</h3>
                     <div><text-angular ng-model="act.notes"></text-angular></div>
                 </div>
             </div>
             <button type="button" class="btn btn-primary pull-right" ng-click="pVm.saveAct(act.id)" ng-if="pVm.edit.act.save">Save Act</button>
             <div class="row">
                 <div class="col-xs-12">
-                    <h4>Scenes: <a ng-click="pVm.openSceneAdd(act.sequences[0].id)"><i class="fa fa-plus-circle"></i></a></h4>
+                    <h3>Scenes: <a ng-click="pVm.openSceneAdd(act.sequences[0].id)"><i class="fa fa-plus-circle"></i></a></h3>
                     <p ng-if="pVm.edit.scene.add">Add new scene after which scene?</p>
                     <select ng-if="pVm.edit.scene.add" ng-options="scene.title for scene in pVm.scenes track by scene.id" ng-model="pVm.selectedScene"></select>
                     <button ng-if="pVm.edit.scene.add" type="button" class="btn btn-primary" ng-click="pVm.addScene(act.sequences[0].id)" ng-disabled="pVm.edit.saving">Add</button>
@@ -94,7 +90,7 @@
                         <div class="col-xs-12">
                             <div class="row">
                                 <div class="col-xs-6">
-                                    <h4>Summary:</h4>
+                                    <h4 class="summaryLabel">Summary:</h4>
                                 </div>
                                 <div class="col-xs-6">
                                     <span class="wordCount">Word count: {{pVm.wordCount.sceneSummary}}</span>
@@ -115,13 +111,13 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-12">
-                            <h4>Setting:</h4>
+                            <h4 class="settingLabel">Setting:</h4>
                             <input type="text" ng-model="pVm.scene.setting" class="form-control" />
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12">
-                            <h1 class="title"><small>Characters</small> <a ng-click="pVm.openCharacterSceneAdd()"><i class="fa fa-plus-circle"></i></a></h1>
+                            <h3>Characters <a ng-click="pVm.openCharacterSceneAdd()"><i class="fa fa-plus-circle"></i></a></h3>
                             <div class="row">
                                 <div class="col-sm-3" ng-cloak>
                                     <div ng-if="pVm.add.character">
@@ -147,7 +143,7 @@
                                     <section class="panel" id="selectedCharacterPanel" ng-if="pVm.selectedCharacter">
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <h4>{{pVm.selectedCharacter.character.name}}</h4>
+                                                <h3>{{pVm.selectedCharacter.character.name}}</h3>
                                             </div>
                                         </div>
                                         <div class="row">
