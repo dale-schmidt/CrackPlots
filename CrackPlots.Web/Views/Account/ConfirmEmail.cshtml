@@ -1,10 +1,40 @@
-﻿@{
-    ViewBag.Title = "Confirm Email";
+﻿
+@{
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
-<h2>@ViewBag.Title.</h2>
-<div>
-    <p>
-        Thank you for confirming your email. Please @Html.ActionLink("Click here to Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
-    </p>
+<div ng-controller="confirmController as cVm">
+    <h2>{{cVm.message}}</h2>
 </div>
+
+@section Scripts {
+    <script type="text/javascript">
+        
+        (function () {
+            "use strict";
+            angular.module('myApp')
+                .controller('confirmController', ConfirmController);
+
+            ConfirmController.$inject = ['$http', '$window', '$location'];
+
+            function ConfirmController($http, $window, $location) {
+                var vm = this;
+                vm.$http = $http;
+                vm.$window = $window;
+                vm.$location = $location;
+
+                vm.message = 'Please wait while your email is confirmed.';
+
+                vm.confirm = _confirm;
+
+                vm.confirm();
+
+                function _confirm() {
+                    var id = vm.$location.search().id;
+                    var token = vm.$location.search().token;
+                }
+            }
+        })();
+    </script>
+    
+    }

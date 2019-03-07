@@ -1,4 +1,5 @@
-﻿using ForeSight.Web.Models.Requests;
+﻿using ForeSight.Web.Domain;
+using ForeSight.Web.Models.Requests;
 using ForeSight.Web.Models.Responses;
 using ForeSight.Web.Services;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -43,13 +44,15 @@ namespace ForeSight.Web.Controllers.ApiControllers
             role.RoleId = 2;
             AspNetUserRoleService.Post(role);
 
-            PersonAddRequest person = new PersonAddRequest();
-            ItemResponse<int> response = new ItemResponse<int>();
-            person.Email = model.Email;
-            person.AspNetUserId = entityUser.Id;
-            response.Item = PersonService.Insert(person);
-            UserService service = new UserService();
-            LoginResponse lR = service.Signin(model.Email, model.Password);
+            ItemResponse<SecurityToken> response = SendNewConfirmationEmail(model.Email, entityUser.Id);
+
+            //PersonAddRequest person = new PersonAddRequest();
+            //ItemResponse<int> response = new ItemResponse<int>();
+            //person.Email = model.Email;
+            //person.AspNetUserId = entityUser.Id;
+            //response.Item = PersonService.Insert(person);
+            //UserService service = new UserService();
+            //LoginResponse lR = service.Signin(model.Email, model.Password);
             return Request.CreateResponse(HttpStatusCode.OK, response);
         }
         //[Route("{guid:Guid}"), HttpPut]
@@ -62,67 +65,66 @@ namespace ForeSight.Web.Controllers.ApiControllers
         //    return Request.CreateResponse(HttpStatusCode.OK, response);
         //}
 
-        //private async Task<ItemResponse<Guid>> SendNewConfirmationEmail(string firstName, string lastName, string email, string id)
-        //{
-        //    SecurityTokenAddRequest securityToken = new SecurityTokenAddRequest();
-        //    securityToken.FirstName = firstName;
-        //    securityToken.LastName = lastName;
-        //    securityToken.Email = email;
-        //    securityToken.TokenTypeId = 1;
-        //    securityToken.AspNetUserId = id;
+        private ItemResponse<SecurityToken> SendNewConfirmationEmail(string email, string id)
+        {
+            SecurityTokenAddRequest securityTokenAddRequest = new SecurityTokenAddRequest();
 
-        //    Guid emailSecurityToken = SecurityTokenService.Insert(securityToken);
+            securityTokenAddRequest.Email = email;
+            securityTokenAddRequest.AspNetUserId = id;
 
-        //    ConfirmationEmailRequest emailRequest = new ConfirmationEmailRequest();
-        //    emailRequest.FirstName = firstName;
-        //    emailRequest.LastName = lastName;
-        //    emailRequest.Email = email;
-        //    emailRequest.SecurityToken = emailSecurityToken;
-        //    //Removed static to enable DI
-        //    await _emailService.ConfirmRegistration(emailRequest);
-        //    ItemResponse<Guid> response = new ItemResponse<Guid>();
-        //    response.Item = emailSecurityToken;
-        //    return response;
-        //}
+            SecurityToken securityToken = new SecurityToken();
+            securityToken.TokenGuid = SecurityTokenService.Insert(securityTokenAddRequest);
+            securityToken.AspNetUserId = id;
 
-        //[Route("{guid:Guid}"), HttpGet]
-        //public HttpResponseMessage ConfirmToken(Guid guid)
-        //{
-        //    SecurityToken securityToken = SecurityTokenService.SelectByGuid(guid);
+            //ConfirmationEmailRequest emailRequest = new ConfirmationEmailRequest();
+            //emailRequest.FirstName = firstName;
+            //emailRequest.LastName = lastName;
+            //emailRequest.Email = email;
+            //emailRequest.SecurityToken = emailSecurityToken;
+            ////Removed static to enable DI
+            //await _emailService.ConfirmRegistration(emailRequest);
+            
+            ItemResponse<SecurityToken> response = new ItemResponse<SecurityToken>();
+            response.Item = securityToken;
+            return response;
+        }
 
-        //    if (securityToken.AspNetUserId != null)
-        //    {
-        //        DateTime now = DateTime.UtcNow;
-        //        TimeSpan daysElapsed = (now - securityToken.DateCreated);
-        //        if (daysElapsed.TotalDays > 1)
-        //        {
-        //            String errorMessage = "1|Not activated in 24 hours";
-        //            ErrorResponse response = new ErrorResponse(errorMessage);
-        //            return Request.CreateResponse(HttpStatusCode.NotAcceptable, response);
-        //        }
-        //        else
-        //        {
-        //            UserService.ConfirmEmail(securityToken.AspNetUserId);
-        //            if (!_personService.CheckIfPerson(securityToken.AspNetUserId))
-        //            {
-        //                PersonAddRequest person = new PersonAddRequest();
-        //                person.FirstName = securityToken.FirstName;
-        //                person.LastName = securityToken.LastName;
-        //                person.Email = securityToken.Email;
-        //                person.AspNetUserId = securityToken.AspNetUserId;
-        //                int id = _personService.InsertFromRegister(person);
-        //            }
-        //            SuccessResponse response = new SuccessResponse();
-        //            return Request.CreateResponse(HttpStatusCode.OK, response);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        String errorMessage = "2|Confirm failed";
-        //        ErrorResponse response = new ErrorResponse(errorMessage);
-        //        return Request.CreateResponse(HttpStatusCode.BadRequest, response);
-        //    }
-        //}
+        [Route("{userId}/{guid:Guid}"), HttpGet]
+        public HttpResponseMessage ConfirmToken(String userId, Guid guid)
+        {
+            SecurityToken securityToken = SecurityTokenService.SelectByGuid(guid);
+
+            if (securityToken.AspNetUserId != null && securityToken.AspNetUserId == userId)
+            {
+                DateTime now = DateTime.UtcNow;
+                TimeSpan daysElapsed = (now - securityToken.DateCreated);
+                if (daysElapsed.TotalDays > 1)
+                {
+                    String errorMessage = "1|Not activated in 24 hours";
+                    ErrorResponse response = new ErrorResponse(errorMessage);
+                    return Request.CreateResponse(HttpStatusCode.NotAcceptable, response);
+                }
+                else
+                {
+                    UserService.ConfirmEmail(securityToken.AspNetUserId);
+                    if (!PersonService.CheckIfPerson(securityToken.AspNetUserId))
+                    {
+                        PersonAddRequest person = new PersonAddRequest();
+                        person.Email = securityToken.Email;
+                        person.AspNetUserId = securityToken.AspNetUserId;
+                        int id = PersonService.Insert(person);
+                    }
+                    SuccessResponse response = new SuccessResponse();
+                    return Request.CreateResponse(HttpStatusCode.OK, response);
+                }
+            }
+            else
+            {
+                String errorMessage = "2|Confirm failed";
+                ErrorResponse response = new ErrorResponse(errorMessage);
+                return Request.CreateResponse(HttpStatusCode.BadRequest, response);
+            }
+        }
 
         [AllowAnonymous]
         [Route("login"), HttpPost]
@@ -139,8 +141,7 @@ namespace ForeSight.Web.Controllers.ApiControllers
             LoginResponse lR = service.Signin(model.Email, model.Password);
             if (lR.HasError)
             {
-
-                return Request.CreateResponse(HttpStatusCode.Unauthorized, lR.Message);
+                return Request.CreateResponse(HttpStatusCode.Forbidden, lR.Message);
             }
 
             else

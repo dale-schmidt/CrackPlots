@@ -175,14 +175,10 @@ namespace ForeSight.Web.Controllers
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
-        public async Task<ActionResult> ConfirmEmail(string userId, string code)
+        public ActionResult ConfirmEmail()
         {
-            if (userId == null || code == null)
-            {
-                return View("Error");
-            }
-            var result = await UserManager.ConfirmEmailAsync(userId, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
+            //var result = await UserManager.ConfirmEmailAsync(userId, code);
+            return View();
         }
 
         //

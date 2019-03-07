@@ -218,16 +218,26 @@ namespace Sabio.Web.Requests
 
         }
 
-        //public static void ConfirmEmail(string aspNetUserId)
-        //{
-        //    DataProvider.ExecuteNonQuery(GetConnection, "dbo.AspNetUsers_ConfirmEmail",
-        //        inputParamMapper: delegate (SqlParameterCollection paramCollection)
-        //        {
-        //            paramCollection.AddWithValue("@Id", aspNetUserId);
-        //        }
-        //        );
-        //    return;
-        //}
+        public static void ConfirmEmail(string aspNetUserId)
+        {
+            using(SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
+            {
+                conn.Open();
+                using(SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "dbo.AspNetUsers_ConfirmEmail";
+
+                    cmd.Parameters.AddWithValue("@AspNetUserId", aspNetUserId);
+
+                    cmd.ExecuteNonQuery();
+                }
+                conn.Close();
+
+                return;
+            }
+        }
         public LoginResponse Signin(string emailaddress, string password)
         {
             ApplicationUserManager userManager = GetUserManager();
@@ -243,15 +253,15 @@ namespace Sabio.Web.Requests
                 };
             }
 
-            //if (!user.EmailConfirmed)
-            //{
-            //    return new LoginResponse()
-            //    {
-            //        HasError = true,
-            //        Message = ("Your Email Has Not Been Confirmed! Please Check Your Inbox or Spam folder!")
-            //    };
+            if (!user.EmailConfirmed)
+            {
+                return new LoginResponse()
+                {
+                    HasError = true,
+                    Message = ("Your Email Has Not Been Confirmed! Please Check Your Inbox or Spam folder!")
+                };
 
-            //}
+            }
             ClaimsIdentity signin = userManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
             authenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = true }, signin);
             return new LoginResponse()

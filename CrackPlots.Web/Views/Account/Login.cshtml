@@ -106,7 +106,11 @@
                 function _submitError(resp) {
                     vm.submitted = false;
                     console.log(resp);
-                    alert("Login failed");
+                    if (resp.status === 403) {
+                        alert("User email has not been confirmed.")
+                    } else {
+                        alert("Login failed");
+                    }
                 }
             }
         })();

@@ -240,6 +240,7 @@
     <Compile Include="Domain\Plot.cs" />
     <Compile Include="Domain\Project.cs" />
     <Compile Include="Domain\Scene.cs" />
+    <Compile Include="Domain\SecurityToken.cs" />
     <Compile Include="Domain\Sequence.cs" />
     <Compile Include="Domain\StoryType.cs" />
     <Compile Include="Global.asax.cs">
@@ -264,6 +265,7 @@
     <Compile Include="Models\Requests\ProjectUpdateRequest.cs" />
     <Compile Include="Models\Requests\SceneAddRequest.cs" />
     <Compile Include="Models\Requests\SceneUpdateRequest.cs" />
+    <Compile Include="Models\Requests\SecurityTokenAddRequest.cs" />
     <Compile Include="Models\Requests\SequenceAddRequest.cs" />
     <Compile Include="Models\Requests\SequenceScenesUpdateRequest.cs" />
     <Compile Include="Models\Requests\SequenceTitlesUpdateRequest.cs" />
@@ -287,6 +289,7 @@
     <Compile Include="Services\ProjectService.cs" />
     <Compile Include="Services\CharacterSceneService.cs" />
     <Compile Include="Services\SceneService.cs" />
+    <Compile Include="Services\SecurityTokenService.cs" />
     <Compile Include="Services\SequenceService.cs" />
     <Compile Include="Services\StoryTypeService.cs" />
     <Compile Include="Services\UserService.cs" />
@@ -2331,6 +2334,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="HTML_Templates\PasswordResetEmail.html" />
+    <Content Include="HTML_Templates\RegistrationEmail.html" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-aria.js" />

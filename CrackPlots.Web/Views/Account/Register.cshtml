@@ -98,7 +98,7 @@
                 }
 
                 function _submitSuccess(resp) {
-                    vm.$window.location.href = '/';
+                    vm.$window.location.href = '/account/confirmemail?id=' + resp.data.item.aspNetUserId + '&token=' + resp.data.item.tokenGuid;
                 }
 
                 function _submitError(resp) {

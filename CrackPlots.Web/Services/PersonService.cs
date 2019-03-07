@@ -40,6 +40,34 @@ namespace ForeSight.Web.Services
             return id;
         }
 
+        public static bool CheckIfPerson(string aspNetUserId)
+        {
+            bool personExists = false;
+
+            using(SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
+            {
+                conn.Open();
+                using(SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandText = "dbo.Person_CheckIfExists";
+                    cmd.Parameters.AddWithValue("@AspNetUserId", aspNetUserId);
+                    SqlParameter exists = new SqlParameter("@Exists", System.Data.SqlDbType.Bit)
+                    {
+                        Direction = System.Data.ParameterDirection.Output
+                    };
+                    cmd.Parameters.Add(exists);
+
+                    cmd.ExecuteNonQuery();
+
+                    personExists = (bool)exists.Value;
+                }
+                conn.Close();
+            }
+            return personExists;
+        }
+
         //public static void Update(PersonUpdateRequest model)
         //{
         //    using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
@@ -101,68 +129,6 @@ namespace ForeSight.Web.Services
         //        conn.Close();
         //    }
         //    return character;
-        //}
-
-        //public static List<Person> SelectBySceneId(int sceneId)
-        //{
-        //    List<Person> list = null;
-        //    using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
-        //    {
-        //        conn.Open();
-        //        using (SqlCommand cmd = new SqlCommand())
-        //        {
-        //            cmd.Connection = conn;
-        //            cmd.CommandType = System.Data.CommandType.StoredProcedure;
-        //            cmd.CommandText = "dbo.Character_SelectBySceneId";
-        //            cmd.Parameters.AddWithValue("@SceneId", sceneId);
-
-        //            SqlDataReader reader = cmd.ExecuteReader();
-
-        //            while (reader.Read())
-        //            {
-        //               // Person person = MapCharacter(reader);
-
-        //                if (list == null)
-        //                {
-        //                    list = new List<Person>();
-        //                }
-        //                list.Add(character);
-        //            }
-        //        }
-        //        conn.Close();
-        //    }
-        //    return list;
-        //}
-
-        //public static List<Character> SelectByProjectId(int projectId)
-        //{
-        //    List<Character> list = null;
-        //    using (SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
-        //    {
-        //        conn.Open();
-        //        using (SqlCommand cmd = new SqlCommand())
-        //        {
-        //            cmd.Connection = conn;
-        //            cmd.CommandType = System.Data.CommandType.StoredProcedure;
-        //            cmd.CommandText = "dbo.Character_SelectByProjectId";
-        //            cmd.Parameters.AddWithValue("@ProjectId", projectId);
-
-        //            SqlDataReader reader = cmd.ExecuteReader();
-
-        //            while (reader.Read())
-        //            {
-        //                Character character = MapCharacter(reader);
-
-        //                if (list == null)
-        //                {
-        //                    list = new List<Character>();
-        //                }
-        //                list.Add(character);
-        //            }
-        //        }
-        //        conn.Close();
-        //    }
-        //    return list;
         //}
     }
 }
