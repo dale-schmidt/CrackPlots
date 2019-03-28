@@ -39,7 +39,7 @@
         <p ng-if="aVm.add.sequence">Add new sequence after which sequence?</p>
         <select ng-if="aVm.add.sequence" ng-options="sequence.title for sequence in aVm.sequences track by sequence.id" ng-model="aVm.selectedSequence"></select>
         <button ng-if="aVm.add.sequence" type="button" class="btn btn-primary" ng-click="aVm.addSequence()">Add</button>
-        <md-tabs md-stretch-tabs="always" md-selected="aVm.activeSequence" md-dynamic-height="true" id="sequenceTabs" class="md-primary md-hue-1">
+        <md-tabs md-stretch-tabs="always" md-selected="aVm.activeSequence" md-dynamic-height="true" id="sequenceTabs" class="md-primary md-hue-1" md-no-pagination="true">
             <md-tab ng-repeat="sequence in aVm.act.sequences" label="{{sequence.title}}" md-on-select="aVm.sequenceChange(sequence)" ng-cloak>
                 <div class="row">
                     <div class="col-xs-12">
@@ -108,7 +108,7 @@
                                 <input type="text" ng-model="aVm.scene.setting" class="form-control" />
                             </div>
                         </div>
-                        <div class="row">
+                        @*<div class="row">
                             <div class="col-xs-12">
                                 <h3>Characters <a ng-click="aVm.openCharacterSceneAdd()"><i class="fa fa-plus-circle"></i></a></h3>
                                 <div class="row">
@@ -209,7 +209,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>*@
                         <button type="button" class="btn btn-danger pull-right" ng-click="aVm.deleteScene($event, sequence.id, aVm.scene.id)">Delete Scene</button>
                     </div>
                 </div>

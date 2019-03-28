@@ -36,24 +36,33 @@ namespace ForeSight.Web.Controllers.ApiControllers
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
             }
-            IdentityUser entityUser = UserService.CreateUser(model.Email, model.Password);
+            try
+            {
+                IdentityUser entityUser = UserService.CreateUser(model.Email, model.Password);
+                //Adds Newly created User to AspNetUserRoles table with the default role of 'user'
+                AspNetUserRoleAddRequest role = new AspNetUserRoleAddRequest();
+                role.UserId = entityUser.Id;
+                role.RoleId = 2;
+                AspNetUserRoleService.Post(role);
 
-            //Adds Newly created User to AspNetUserRoles table with the default role of 'user'
-            AspNetUserRoleAddRequest role = new AspNetUserRoleAddRequest();
-            role.UserId = entityUser.Id;
-            role.RoleId = 2;
-            AspNetUserRoleService.Post(role);
+                ItemResponse<SecurityToken> response = SendNewConfirmationEmail(model.Email, entityUser.Id);
 
-            ItemResponse<SecurityToken> response = SendNewConfirmationEmail(model.Email, entityUser.Id);
+                //PersonAddRequest person = new PersonAddRequest();
+                //ItemResponse<int> response = new ItemResponse<int>();
+                //person.Email = model.Email;
+                //person.AspNetUserId = entityUser.Id;
+                //response.Item = PersonService.Insert(person);
+                //UserService service = new UserService();
+                //LoginResponse lR = service.Signin(model.Email, model.Password);
+                return Request.CreateResponse(HttpStatusCode.OK, response);
+            }
+            catch
+            {
+                ErrorResponse response = new ErrorResponse("User already exists");
+                return Request.CreateResponse(HttpStatusCode.Conflict, response);
+            }
 
-            //PersonAddRequest person = new PersonAddRequest();
-            //ItemResponse<int> response = new ItemResponse<int>();
-            //person.Email = model.Email;
-            //person.AspNetUserId = entityUser.Id;
-            //response.Item = PersonService.Insert(person);
-            //UserService service = new UserService();
-            //LoginResponse lR = service.Signin(model.Email, model.Password);
-            return Request.CreateResponse(HttpStatusCode.OK, response);
+            
         }
         //[Route("{guid:Guid}"), HttpPut]
         //public async Task<HttpResponseMessage> ResendConfirmationEmail(Guid guid)
@@ -141,9 +150,19 @@ namespace ForeSight.Web.Controllers.ApiControllers
             LoginResponse lR = service.Signin(model.Email, model.Password);
             if (lR.HasError)
             {
-                return Request.CreateResponse(HttpStatusCode.Forbidden, lR.Message);
+                if(lR.Message == "Incorrect Email or Password!")
+                {
+                    return Request.CreateResponse(HttpStatusCode.PreconditionFailed, lR.Message);
+                }
+                if(lR.Message == "Your Email Has Not Been Confirmed! Please Check Your Inbox or Spam folder!")
+                {
+                    return Request.CreateResponse(HttpStatusCode.Forbidden, lR.Message);
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.InternalServerError, lR.Message);
+                }
             }
-
             else
             {
                 SuccessResponse response = new SuccessResponse();

@@ -15,13 +15,14 @@
             angular.module('myApp')
                 .controller('confirmController', ConfirmController);
 
-            ConfirmController.$inject = ['$http', '$window', '$location'];
+            ConfirmController.$inject = ['$http', '$window', '$location', '$timeout'];
 
-            function ConfirmController($http, $window, $location) {
+            function ConfirmController($http, $window, $location, $timeout) {
                 var vm = this;
                 vm.$http = $http;
                 vm.$window = $window;
                 vm.$location = $location;
+                vm.$timeout = $timeout;
 
                 vm.message = 'Please wait while your email is confirmed.';
 
@@ -32,6 +33,18 @@
                 function _confirm() {
                     var id = vm.$location.search().id;
                     var token = vm.$location.search().token;
+                    var url = '/api/users/' + id + '/' + token;
+                    vm.$http.get(url)
+                        .then(_confirmSuccess, _confirmError);
+                }
+
+                function _confirmSuccess(resp) {
+                    vm.message = 'Thank you, your email has been confirmed';
+                    vm.$timeout(function () { vm.$window.location.href = '/account/login'; }, 3000);
+                }
+
+                function _confirmError(resp) {
+                    console.log(resp);
                 }
             }
         })();

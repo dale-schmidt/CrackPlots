@@ -103,6 +103,7 @@
 
                 function _submitError(resp) {
                     vm.submitted = false;
+                    alert(resp.data.errors[0]);
                     console.log(resp);
                 }
             }

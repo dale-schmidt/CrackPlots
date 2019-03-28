@@ -108,6 +108,8 @@
                     console.log(resp);
                     if (resp.status === 403) {
                         alert("User email has not been confirmed.")
+                    } else if (resp.status === 412) {
+                        alert("Incorrect email or password.")
                     } else {
                         alert("Login failed");
                     }

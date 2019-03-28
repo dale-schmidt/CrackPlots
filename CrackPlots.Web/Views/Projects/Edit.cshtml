@@ -32,7 +32,7 @@
         </div>
     </div>
     <h3>Acts:</h3>
-    <md-tabs md-stretch-tabs="always" md-dynamic-height="true" class="md-primary md-hue-1" md-selected="pVm.activeAct">
+    <md-tabs md-stretch-tabs="always" md-dynamic-height="true" class="md-primary md-hue-1" md-selected="pVm.activeAct" md-no-pagination="true">
         <md-tab ng-repeat="act in pVm.project.acts" label="{{act.title}}" md-on-select="pVm.selectAct()" ng-cloak>
             <div class="row">
                 <div class="col-xs-12">
@@ -65,7 +65,7 @@
         </md-tab>
     </md-tabs>
     <hr />
-    <h3>Characters <a ng-click="pVm.addCharacter()"><i class="fa fa-plus-circle"></i></a></h3>
+    @*<h3>Characters <a ng-click="pVm.addCharacter()"><i class="fa fa-plus-circle"></i></a></h3>
     <div class="row">
         <div class="col-sm-3" ng-cloak>
             <section class="panel">
@@ -103,7 +103,7 @@
                 <button type="button" class="btn btn-danger pull-right" ng-click="pVm.deleteCharacter()">Delete</button>
             </section>
         </div>
-    </div>
+    </div>*@
     <div class="row">
         <div class="col-xs-12">
             <a type="button" class="btn btn-default" ng-href="/projects/tv/{{pVm.project.seasonId}}" ng-if="pVm.project.storyType.id == 6">Series Page</a>

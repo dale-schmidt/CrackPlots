@@ -1,5 +1,5 @@
 ﻿(function () {
-    "use strict"
+    "use strict";
     angular.module('myApp')
         .directive('ngEnter', function () {
             return function (scope, element, attrs) {
