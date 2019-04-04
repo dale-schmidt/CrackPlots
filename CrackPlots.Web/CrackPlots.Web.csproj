@@ -2534,6 +2534,7 @@
     <Content Include="Views\Projects\Print.cshtml" />
     <Content Include="Views\Projects\Episode.cshtml" />
     <Content Include="Views\Shared\_OutlineLayout.cshtml" />
+    <Content Include="Views\Home\FAQ.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

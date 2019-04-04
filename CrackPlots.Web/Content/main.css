@@ -405,6 +405,16 @@ h1.title {
     vertical-align:baseline;
 }
 
+/*    FAQ     */
+.faqAnswer {
+    padding: 0px 50px;
+}
+
+.faqLink {
+    float: right;
+    display: inline-block;
+}
+
 @media only screen and (min-width: 769px) {
     .notes {
         height: 173px;
