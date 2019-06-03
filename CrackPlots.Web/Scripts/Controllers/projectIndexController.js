@@ -43,6 +43,7 @@
 
         vm.openProjectAdd = _openProjectAdd;
         vm.openProject = _openProject;
+        vm.goToFaq = _goToFaq;
 
         _loadProjects();
         _getStoryTypes();
@@ -119,6 +120,10 @@
         function _cancelProject() {
             vm.newProject = null;
             vm.addProjectEdit = false;
+        }
+
+        function _goToFaq() {
+            vm.$window.location.href = '/home/faq';
         }
     }
 

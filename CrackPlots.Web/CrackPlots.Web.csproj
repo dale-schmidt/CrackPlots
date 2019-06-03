@@ -258,6 +258,7 @@
     <Compile Include="Models\Requests\CharacterSceneRequest.cs" />
     <Compile Include="Models\Requests\CharacterUpdateRequest.cs" />
     <Compile Include="Models\Requests\LoginAddRequest.cs" />
+    <Compile Include="Models\Requests\PasswordResetRequest.cs" />
     <Compile Include="Models\Requests\PersonAddRequest.cs" />
     <Compile Include="Models\Requests\PersonUpdateRequest.cs" />
     <Compile Include="Models\Requests\ProjectAddRequest.cs" />

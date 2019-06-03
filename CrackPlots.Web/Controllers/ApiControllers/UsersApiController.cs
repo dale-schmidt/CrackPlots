@@ -171,49 +171,49 @@ namespace ForeSight.Web.Controllers.ApiControllers
         }
 
 
+        [AllowAnonymous]
+        [Route("forgotpassword/{email}"), HttpPost]
+        public HttpResponseMessage VerifyUser(String email)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+            IdentityUser user = UserService.GetUser(email);
+            if (user == null)
+            {
+                ErrorResponse er = new ErrorResponse("This email is not associated with an account.");
+                return Request.CreateResponse(HttpStatusCode.BadRequest, er);
+            }
+            ItemResponse<Guid> response = SendResetPasswordEmail(email);
 
-        //[Route("forgotpassword"), HttpPost]
-        //public async Task<HttpResponseMessage> VerifyUser(ConfirmationEmailRequest model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return Request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
-        //    }
-        //    PersonBase pb = UserService.SelectByEmail(model.Email);
-        //    if (pb == null)
-        //    {
-        //        ErrorResponse er = new ErrorResponse("This email is not associated with an account.");
-        //        return Request.CreateResponse(HttpStatusCode.BadRequest, er);
-        //    }
-        //    ItemResponse<Guid> response = await SendResetPasswordEmail(pb, model);
+            return Request.CreateResponse(HttpStatusCode.OK, response);
 
-        //    return Request.CreateResponse(HttpStatusCode.OK, response);
+        }
 
-        //}
+        private ItemResponse<Guid> SendResetPasswordEmail(String email)
+        {
+            SecurityTokenAddRequest securityTokenAddRequest = new SecurityTokenAddRequest();
 
-        //private async Task<ItemResponse<Guid>> SendResetPasswordEmail(PersonBase pb, ConfirmationEmailRequest model)
-        //{
-        //    SecurityTokenAddRequest securityToken = new SecurityTokenAddRequest();
-        //    securityToken.FirstName = pb.FirstName;
-        //    securityToken.LastName = pb.LastName;
-        //    securityToken.Email = model.Email;
-        //    securityToken.TokenTypeId = 2;
-        //    securityToken.AspNetUserId = "";
+            securityTokenAddRequest.Email = email;
+            securityTokenAddRequest.AspNetUserId = UserService.GetUser(email).Id;
 
-        //    Guid emailSecurityToken = SecurityTokenService.Insert(securityToken);
+            SecurityToken securityToken = new SecurityToken();
+            securityToken.TokenGuid = SecurityTokenService.Insert(securityTokenAddRequest);
+            securityToken.AspNetUserId = UserService.GetUser(email).Id;
 
-        //    ConfirmationEmailRequest emailRequest = new ConfirmationEmailRequest();
-        //    emailRequest.FirstName = pb.FirstName;
-        //    emailRequest.LastName = pb.LastName;
-        //    emailRequest.Email = model.Email;
-        //    emailRequest.SecurityToken = emailSecurityToken;
+            //ConfirmationEmailRequest emailRequest = new ConfirmationEmailRequest();
+            //emailRequest.FirstName = firstName;
+            //emailRequest.LastName = lastName;
+            //emailRequest.Email = email;
+            //emailRequest.SecurityToken = emailSecurityToken;
+            ////Removed static to enable DI
+            //await _emailService.ConfirmRegistration(emailRequest);
 
-        //    await _emailService.ForgotPassword(emailRequest);
-
-        //    ItemResponse<Guid> response = new ItemResponse<Guid>();
-        //    response.Item = emailSecurityToken;
-        //    return response;
-        //}
+            ItemResponse<Guid> response = new ItemResponse<Guid>();
+            response.Item = securityToken.TokenGuid;
+            return response;
+        }
         //[Route("resend/{guid:Guid}"), HttpPut]
         //public async Task<HttpResponseMessage> ResendResetPasswordEmail(Guid guid)
         //{
@@ -262,15 +262,15 @@ namespace ForeSight.Web.Controllers.ApiControllers
         //    }
 
         //}
-        //[Route("resetpassword/{guid:Guid}"), HttpPut]
-        //public HttpResponseMessage ResetPassWord(Guid guid, UserUpdateRequest model)
-        //{
-        //    SecurityToken securityToken = SecurityTokenService.SelectByGuid(guid);
+        [Route("resetpassword"), HttpPut]
+        public HttpResponseMessage ResetPassWord(PasswordResetRequest model)
+        {
+            SecurityToken securityToken = SecurityTokenService.SelectByGuid(model.Guid);
 
-        //    UserService.ChangePassWord(securityToken.AspNetUserId, model.Password);
-        //    ItemsResponse<bool> response = new ItemsResponse<bool>();
-        //    return Request.CreateResponse(HttpStatusCode.OK, response);
-        //}
+            UserService.ChangePassWord(securityToken.AspNetUserId, model.Password);
+            ItemsResponse<bool> response = new ItemsResponse<bool>();
+            return Request.CreateResponse(HttpStatusCode.OK, response);
+        }
         //[Route("home")]
         //[HttpGet]
         //public HttpResponseMessage LoadHome()

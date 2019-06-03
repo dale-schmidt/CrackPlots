@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ForeSight.Web.Models;
+using ForeSight.Web.Models.ViewModels;
 
 namespace ForeSight.Web.Controllers
 {
@@ -228,9 +229,12 @@ namespace ForeSight.Web.Controllers
         //
         // GET: /Account/ResetPassword
         [AllowAnonymous]
-        public ActionResult ResetPassword(string code)
+        [Route("resetpassword/{securityToken}")]
+        public ActionResult ResetPassword(String securityToken)
         {
-            return code == null ? View("Error") : View();
+            ItemViewModel<String> model = new ItemViewModel<String>();
+            model.Item = securityToken;
+            return View(model);
         }
 
         //

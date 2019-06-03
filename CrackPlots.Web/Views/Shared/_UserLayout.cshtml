@@ -44,9 +44,9 @@
     <!-- START TOPBAR -->
     <div ng-app="myApp">
         <div ng-controller="topbarController as tVm">
-            <div class='page-topbar ' ng-cloak>
+            <div class='page-topbar' ng-cloak>
                 <div class='logo-area'>
-                    <h3 class="logo"><a href="/projects">CrackPlots</a></h3>
+                    <h3 class="logo"><a ng-href="{{tVm.titleLink}}">CrackPlots</a></h3>
                 </div>
                 <div class='quick-area'>
                     <div class='pull-left'>
@@ -89,7 +89,6 @@
     <script>window.jQuery || document.write('<script src="/Assets/js/jquery-1.11.2.min.js"><\/script>');</script>
     <!-- CORE JS FRAMEWORK - END -->
     <!-- OTHER SCRIPTS INCLUDED ON THIS PAGE - START -->
-
     <!-- OTHER SCRIPTS INCLUDED ON THIS PAGE - END -->
     <!-- CORE TEMPLATE JS - START -->
     <script src="/Assets/js/scripts.js" type="text/javascript"></script>
@@ -103,6 +102,7 @@
     <script src="~/Scripts/textAngular-rangy.min.js"></script>
     <script src="~/Scripts/textAngular-sanitize.min.js"></script>
     <script src="~/Scripts/textAngular.min.js"></script>
+    
     <script type="text/javascript">
         (function () {
             "use strict";
@@ -141,6 +141,11 @@
                 vm.$http = $http;
                 vm.$window = $window;
                 vm.razorViewModel = razorViewModel;
+
+                vm.titleLink = '/projects';
+                if (vm.$window.location.pathname === '/projects') {
+                    vm.titleLink = '/';
+                }
 
                 vm.logout = _logout;
 
