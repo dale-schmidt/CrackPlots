@@ -12,32 +12,34 @@
 
 <div ng-controller="projectController as pVm" class="controller">
     <h1 class="projectsTitle" ng-cloak>Projects</h1>
-    <div class="row indexProjectHeaders" ng-cloak>
-        <div class="col-md-4">
-            <h4 id="indexProjectHeaderTitle">Title</h4>
-        </div>
-        <div class="col-md-2">
-            <h4 id="indexProjectHeaderType">Type</h4>
-        </div>
-        <div class="col-md-4">
-            <h4 id="indexProjectHeaderLogline">Logline</h4>
-        </div>
-        <div class="col-md-2">
-            <h4 id="indexProjectHeaderModified">Last Modified</h4>
+    <div class="indexProjectHeaders" ng-cloak>
+        <div class="row">
+            <div class="col-sm-4">
+                <h4 id="indexProjectHeaderTitle">Title</h4>
+            </div>
+            <div class="col-sm-2">
+                <h4 id="indexProjectHeaderType">Type</h4>
+            </div>
+            <div class="col-sm-4">
+                <h4 id="indexProjectHeaderLogline">Logline</h4>
+            </div>
+            <div class="col-sm-2">
+                <h4 id="indexProjectHeaderModified">Last Modified</h4>
+            </div>
         </div>
     </div>
     <div ng-repeat="proj in pVm.projects" ng-click="pVm.openProject(proj)" class="indexProject" ng-cloak>
         <div class="row">
-            <div class="col-md-4 indexProjectTitle">
+            <div class="col-sm-4 col-xs-12 indexProjectTitle">
                 <h3>{{proj.title}}</h3>
             </div>
-            <div class="col-md-2 indexProjectType">
+            <div class="col-sm-2 col-xs-12 indexProjectType">
                 <h5>{{proj.storyType.name}}</h5>
             </div>
-            <div class="col-md-4 indexProjectLogline">
+            <div class="col-sm-4 col-xs-12 indexProjectLogline">
                 <p>{{proj.logline}}</p>
             </div>
-            <div class="col-md-2 indexProjectModified">
+            <div class="col-sm-2 col-xs-12 indexProjectModified">
                 <p>{{proj.dateModified}}</p>
             </div>
         </div>

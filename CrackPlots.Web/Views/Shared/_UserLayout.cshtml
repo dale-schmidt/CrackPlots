@@ -45,20 +45,21 @@
     <div ng-app="myApp">
         <div ng-controller="topbarController as tVm">
             <div class='page-topbar' ng-cloak>
-                <div class='logo-area'>
-                    <a ng-href="{{tVm.titleLink}}" class="logo"><img src="~/Assets/images/CP_logo.jpeg" /></a>
-                </div>
-                <div class='quick-area'>
-                    <div class='pull-left'>
-                        <ul class="info-menu left-links list-inline list-unstyled"></ul>
+                <div class="row">
+                    <div class="col-xs-5">
+                        <div class='logo-area'>
+                            <a ng-href="{{tVm.titleLink}}" class="logo"><img src="~/Assets/images/CP_logo.jpeg" /></a>
+                        </div>
                     </div>
-                    <div class='pull-right'>
-                        <ul class="info-menu right-links list-inline list-unstyled">
-                            <li ng-hide="tVm.razorViewModel.IsLoggedIn"><a href="/account/register">Register</a></li>
-                            <li ng-if="tVm.razorViewModel.IsLoggedIn"><a href="/projects/index">{{tVm.razorViewModel.UserEmail}}</a></li>
-                            <li ng-hide="tVm.razorViewModel.IsLoggedIn"><a href="/account/login">Log In</a></li>
-                            <li id="logout" ng-if="tVm.razorViewModel.IsLoggedIn"><a ng-click="tVm.logout()">Log Out</a></li>
-                        </ul>
+                    <div class="col-xs-3 col-xs-offset-4">
+                        <div class='topbar-right'>
+                            <ul class="info-menu right-links list-inline list-unstyled">
+                                <li ng-hide="tVm.razorViewModel.IsLoggedIn"><a href="/account/register">Register</a></li>
+                                <li ng-if="tVm.razorViewModel.IsLoggedIn" class="topbarUsername"><a href="/projects/index">{{tVm.razorViewModel.UserEmail}}</a></li>
+                                <li ng-hide="tVm.razorViewModel.IsLoggedIn"><a href="/account/login">Log In</a></li>
+                                <li id="logout" ng-if="tVm.razorViewModel.IsLoggedIn"><a ng-click="tVm.logout()">Log Out</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
@@ -70,7 +71,7 @@
         <div class="page-container row-fluid container-fluid">
             <div class="col-md-offset-1 col-md-10 col-xs-12">
                 <section id="main-content" class="panel">
-                    <section class="pic-wrapper main-wrapper row">
+                    <section class="pic-wrapper main-wrapper">
                         @RenderBody()
                     </section>
                 </section>
@@ -102,7 +103,7 @@
     <script src="~/Scripts/textAngular-rangy.min.js"></script>
     <script src="~/Scripts/textAngular-sanitize.min.js"></script>
     <script src="~/Scripts/textAngular.min.js"></script>
-    
+
     <script type="text/javascript">
         (function () {
             "use strict";
