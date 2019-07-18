@@ -4,9 +4,9 @@
 }
 
 <div ng-controller="homeController as hVm">
-    <div class="jumbotron" ng-cloak>
-        <h1>CrackPlots</h1>
-        <p class="lead">Crack your idea wide open</p>
+    <div class="jumbotron container" id="homePagePanel" ng-cloak>
+        <img src="~/Assets/images/CP_logo_white.JPG" />
+        <h2 class="">Break your idea wide open</h2>
         <div>
             <a ng-hide="hVm.razorViewModel.IsLoggedIn" href="/account/register" class="btn btn-primary btn-lg">Sign up</a>
             <a ng-hide="hVm.razorViewModel.IsLoggedIn" href="/account/login" class="btn btn-primary btn-lg">Log In</a>

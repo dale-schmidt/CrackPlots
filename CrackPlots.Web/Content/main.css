@@ -64,14 +64,17 @@ button.btn.btn-danger:hover {
 }
 .page-topbar .logo-area {
     background: rgb(70,70,125);
-    text-align: left;
+    text-align: center;
     float: left;
     width: 20%;
-    padding-left: 75px;
 }
 
-.logo a {
+a.logo {
     text-decoration: none;
+}
+
+.logo img {
+    height:60px;
 }
 
 .right-links a {
@@ -116,6 +119,13 @@ button.btn.btn-danger:hover {
 
 .page-topbar.row {
     margin:0px;
+}
+
+/*      Home Page   */
+
+#homePagePanel {
+    text-align:center;
+    background-color:white;
 }
 
 /*      Index       */

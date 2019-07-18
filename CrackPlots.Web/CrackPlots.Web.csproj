@@ -637,7 +637,12 @@
     <Content Include="Assets\images\apple-touch-icon-144-precomposed.png" />
     <Content Include="Assets\images\apple-touch-icon-57-precomposed.png" />
     <Content Include="Assets\images\apple-touch-icon-72-precomposed.png" />
+    <Content Include="Assets\images\CP_logo.jpeg" />
+    <Content Include="Assets\images\CP_logo_black.jpg" />
+    <Content Include="Assets\images\CP_logo_white.JPG" />
     <Content Include="Assets\images\favicon.png" />
+    <Content Include="Assets\images\icons8-monitor-50.png" />
+    <Content Include="Assets\images\icons8-monitor-64.png" />
     <Content Include="Assets\images\index.html" />
     <Content Include="Assets\images\login-bg.png" />
     <Content Include="Assets\images\login-logo.png" />
@@ -2312,6 +2317,7 @@
     <Content Include="Content\angular-material.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\colorpicker.min.css" />
     <Content Include="Content\flexboxgrid-6.3.1\css\flexboxgrid.css" />
     <Content Include="Content\flexboxgrid-6.3.1\css\flexboxgrid.min.css" />
     <Content Include="Content\flexboxgrid-6.3.1\css\index.css" />
@@ -2355,6 +2361,7 @@
     <Content Include="Scripts\angular-ui\ui-bootstrap.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\bootstrap-colorpicker-module.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">

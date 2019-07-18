@@ -9,7 +9,7 @@
     <meta content="" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <link rel="shortcut icon" href="/Assets/images/favicon.png" type="image/x-icon" />    <!-- Favicon -->
+    <link rel="shortcut icon" href="~/Assets/images/icons8-monitor-64.png" type="image/x-icon" />    <!-- Favicon -->
     <link rel="apple-touch-icon-precomposed" href="/Assets/images/apple-touch-icon-57-precomposed.png">	<!-- For iPhone -->
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/Assets/images/apple-touch-icon-114-precomposed.png">    <!-- For iPhone 4 Retina display -->
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/Assets/images/apple-touch-icon-72-precomposed.png">    <!-- For iPad -->
@@ -22,6 +22,7 @@
     <link href="/Assets/css/animate.min.css" rel="stylesheet" type="text/css" />
     <link href="/Assets/plugins/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/textAngular.css" rel="stylesheet" />
+    <link href="~/Content/colorpicker.min.css" rel="stylesheet" />
     <!-- CORE CSS FRAMEWORK - END -->
     <!-- HEADER SCRIPTS INCLUDED ON THIS PAGE - START -->
 
@@ -45,7 +46,7 @@
         <div ng-controller="topbarController as tVm">
             <div class='page-topbar' ng-cloak>
                 <div class='logo-area'>
-                    <h3 class="logo"><a href="/projects">CrackPlots</a></h3>
+                    <a href="/projects" class="logo"><img src="~/Assets/images/CP_logo.jpeg" /></a>
                 </div>
                 <div class="topbar-center">
                     <div class="topbar-previous">
@@ -110,10 +111,12 @@
     <script src="~/Scripts/textAngular-rangy.min.js"></script>
     <script src="~/Scripts/textAngular-sanitize.min.js"></script>
     <script src="~/Scripts/textAngular.min.js"></script>
+    <script src="~/Scripts/bootstrap-colorpicker-module.min.js"></script>
+
     <script type="text/javascript">
         (function () {
             "use strict";
-            angular.module('myApp', ['ngMaterial', 'ngSanitize', 'textAngular']);
+            angular.module('myApp', ['ngMaterial', 'ngSanitize', 'textAngular', 'colorpicker.module']);
         })();
 
         (function () {
@@ -128,6 +131,35 @@
                 .config(function ($mdThemingProvider) {
                     $mdThemingProvider.theme('error-toast');
                     $mdThemingProvider.theme('success-toast');
+                });
+        })();
+
+        (function () {
+            "use strict";
+            angular.module('myApp')
+                .config(function ($provide) {
+                    $provide.decorator('taOptions', ['taRegisterTool', '$delegate', function (taRegisterTool, taOptions) {
+                        // $delegate is the taOptions we are decorating
+                        // register the tool with textAngular
+                        taRegisterTool('fontColor', {
+                            display: "<button type='button' colorpicker colorpicker-text-editor='true' ng-change='!!fontColor && action(fontColor)' class='btn btn-default font-color' ng-disabled='showHtml()' ng-init-'fontColor=\"#000\"' ng-model='fontColor'><i class='fa fa-paint-brush'></i></button>",
+                            action: function (color) {
+                                if (typeof color === 'string') {
+                                    var me = this;
+                                    if (!this.$editor().wrapSelection) {
+                                        setTimeout(function () {
+                                            me.action(color);
+                                        }, 100)
+                                    } else {
+                                        return this.$editor().wrapSelection('foreColor', color);
+                                    }
+                                }
+                            }
+                        });
+                        // add the button to the default toolbar definition
+                        taOptions.toolbar[0].push('fontColor');
+                        return taOptions;
+                    }]);
                 });
         })();
     </script>
