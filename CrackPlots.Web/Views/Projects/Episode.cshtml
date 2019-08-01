@@ -18,7 +18,7 @@
                 <h3>Logline:</h3>
                 <input class="form-control" ng-model="pVm.project.logline" type="text" />
                 <h3>Notes:</h3>
-                <div><text-angular ng-model="pVm.project.notes" class="trix-content"></text-angular></div>
+                <div><text-angular ta-toolbar="[['bold','italics','underline','strikeThrough'],['ul','ol','indent','outdent'],['colourBlack','colourRed','colourBlue','colourGreen']]" ng-model="pVm.project.notes" class="trix-content"></text-angular></div>
             </div>
         </div>
         <div class="col-sm-4">
@@ -68,11 +68,11 @@
                             <span class="wordCount">Word count: {{pVm.wordCount.actSummary}}</span>
                         </div>
                     </div>
-                    <div><text-angular ng-model="act.summary"></text-angular></div>
+                    <div><text-angular ta-toolbar="[['bold','italics','underline','strikeThrough'],['ul','ol','indent','outdent'],['colourBlack','colourRed','colourBlue','colourGreen']]" ng-model="act.summary"></text-angular></div>
                 </div>
                 <div class="col-xs-12 col-sm-4">
                     <h3 class="notesLabel">Notes:</h3>
-                    <div><text-angular ng-model="act.notes"></text-angular></div>
+                    <div><text-angular ta-toolbar="[['bold','italics','underline','strikeThrough'],['ul','ol','indent','outdent'],['colourBlack','colourRed','colourBlue','colourGreen']]" ng-model="act.notes"></text-angular></div>
                 </div>
             </div>
             <button type="button" class="btn btn-primary pull-right" ng-click="pVm.saveAct(act.id)" ng-if="pVm.edit.act.save">Save Act</button>
@@ -96,17 +96,17 @@
                                     <span class="wordCount">Word count: {{pVm.wordCount.sceneSummary}}</span>
                                 </div>
                             </div>
-                            <div><text-angular ng-model="pVm.scene.summary"></text-angular></div>
+                            <div><text-angular ta-toolbar="[['bold','italics','underline','strikeThrough'],['ul','ol','indent','outdent'],['colourBlack','colourRed','colourBlue','colourGreen']]" ng-model="pVm.scene.summary"></text-angular></div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 col-sm-6">
                             <h5>Conflict:</h5>
-                            <div><text-angular ng-model="pVm.scene.conflict"></text-angular></div>
+                            <div><text-angular ta-toolbar="[['bold','italics','underline','strikeThrough'],['ul','ol','indent','outdent'],['colourBlack','colourRed','colourBlue','colourGreen']]" ng-model="pVm.scene.conflict"></text-angular></div>
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <h5>Turn:</h5>
-                            <div><text-angular ng-model="pVm.scene.turn"></text-angular></div>
+                            <div><text-angular ta-toolbar="[['bold','italics','underline','strikeThrough'],['ul','ol','indent','outdent'],['colourBlack','colourRed','colourBlue','colourGreen']]" ng-model="pVm.scene.turn"></text-angular></div>
                         </div>
                     </div>
                     <div class="row">
@@ -115,7 +115,7 @@
                             <input type="text" ng-model="pVm.scene.setting" class="form-control" />
                         </div>
                     </div>
-                    <div class="row">
+                    @*<div class="row">
                         <div class="col-xs-12">
                             <h3>Characters <a ng-click="pVm.openCharacterSceneAdd()"><i class="fa fa-plus-circle"></i></a></h3>
                             <div class="row">
@@ -179,7 +179,7 @@
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <h5>Notes:</h5>
-                                                <div><text-angular ng-model="pVm.selectedCharacter.notes"></text-angular></div>
+                                                <div><text-angular ta-toolbar="[['bold','italics','underline','strikeThrough'],['ul','ol','indent','outdent'],['colourBlack','colourRed','colourBlue','colourGreen']]" ng-model="pVm.selectedCharacter.notes"></text-angular></div>
                                             </div>
                                         </div>
                                         <button type="button" class="btn btn-default" ng-click="pVm.closeCharacterScene()">Close</button>
@@ -207,7 +207,7 @@
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <h5>Biography:</h5>
-                                                <text-angular ng-model="pVm.newCharacter.biography"></text-angular>
+                                                <text-angular ta-toolbar="[['bold','italics','underline','strikeThrough'],['ul','ol','indent','outdent'],['colourBlack','colourRed','colourBlue','colourGreen']]" ng-model="pVm.newCharacter.biography"></text-angular>
                                             </div>
                                         </div>
                                         <button type="button" class="btn btn-primary" ng-click="pVm.saveNewCharacter()">Save</button>
@@ -216,7 +216,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>*@
                     <button type="button" class="btn btn-danger pull-right" ng-click="pVm.deleteScene($event, sequence.id, pVm.scene.id)">Delete Scene</button>
                 </div>
             </div>

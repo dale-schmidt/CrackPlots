@@ -127,12 +127,11 @@
     <script src="~/Scripts/textAngular-rangy.min.js"></script>
     <script src="~/Scripts/textAngular-sanitize.min.js"></script>
     <script src="~/Scripts/textAngular.min.js"></script>
-    <script src="~/Scripts/bootstrap-colorpicker-module.min.js"></script>
 
     <script type="text/javascript">
         (function () {
             "use strict";
-            angular.module('myApp', ['ngMaterial', 'ngSanitize', 'textAngular', 'colorpicker.module']);
+            angular.module('myApp', ['ngMaterial', 'ngSanitize', 'textAngular']);
         })();
 
         (function () {
@@ -157,23 +156,58 @@
                     $provide.decorator('taOptions', ['taRegisterTool', '$delegate', function (taRegisterTool, taOptions) {
                         // $delegate is the taOptions we are decorating
                         // register the tool with textAngular
-                        taRegisterTool('fontColor', {
-                            display: "<button type='button' colorpicker colorpicker-text-editor='true' ng-change='!!fontColor && action(fontColor)' class='btn btn-default font-color' ng-disabled='showHtml()' ng-init-'fontColor=\"#000\"' ng-model='fontColor'><i class='fa fa-paint-brush'></i></button>",
-                            action: function (color) {
-                                if (typeof color === 'string') {
-                                    var me = this;
-                                    if (!this.$editor().wrapSelection) {
-                                        setTimeout(function () {
-                                            me.action(color);
-                                        }, 100)
-                                    } else {
-                                        return this.$editor().wrapSelection('foreColor', color);
-                                    }
-                                }
+                        taRegisterTool('colourBlack', {
+                            iconclass: "fa fa-font black",
+                            action: function(){
+	                            this.$editor().wrapSelection('forecolor', 'rgb(85,85,85');
                             }
-                        });
+                            });
                         // add the button to the default toolbar definition
-                        taOptions.toolbar[0].push('fontColor');
+                        return taOptions;
+                    }]);
+                });
+            angular.module('myApp')
+                .config(function ($provide) {
+                    $provide.decorator('taOptions', ['taRegisterTool', '$delegate', function (taRegisterTool, taOptions) {
+                        // $delegate is the taOptions we are decorating
+                        // register the tool with textAngular
+                        taRegisterTool('colourRed', {
+                            iconclass: "fa fa-font red",
+                            action: function(){
+	                            this.$editor().wrapSelection('forecolor', 'red');
+                            }
+                            });
+                        // add the button to the default toolbar definition
+                        return taOptions;
+                    }]);
+                });
+            angular.module('myApp')
+                .config(function ($provide) {
+                    $provide.decorator('taOptions', ['taRegisterTool', '$delegate', function (taRegisterTool, taOptions) {
+                        // $delegate is the taOptions we are decorating
+                        // register the tool with textAngular
+                        taRegisterTool('colourBlue', {
+                            iconclass: "fa fa-font blue",
+                            action: function(){
+	                            this.$editor().wrapSelection('forecolor', 'blue');
+                            }
+                            });
+                        // add the button to the default toolbar definition
+                        return taOptions;
+                    }]);
+                });
+            angular.module('myApp')
+                .config(function ($provide) {
+                    $provide.decorator('taOptions', ['taRegisterTool', '$delegate', function (taRegisterTool, taOptions) {
+                        // $delegate is the taOptions we are decorating
+                        // register the tool with textAngular
+                        taRegisterTool('colourGreen', {
+                            iconclass: "fa fa-font green",
+                            action: function(){
+	                            this.$editor().wrapSelection('forecolor', 'green');
+                            }
+                            });
+                        // add the button to the default toolbar definition
                         return taOptions;
                     }]);
                 });

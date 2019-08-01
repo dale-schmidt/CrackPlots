@@ -413,6 +413,34 @@
             outline: none;
         }
 
+    text-angular.red {
+        color:red;
+    }
+    i.fa.fa-font.red {
+        color: red;
+    }
+    text-angular.blue {
+        color: blue;
+    }
+
+    i.fa.fa-font.blue {
+        color: blue;
+    }
+    text-angular.green {
+        color: green;
+    }
+
+    i.fa.fa-font.green {
+        color: green;
+    }
+    text-angular.black {
+        color: rgb(85,85,85);
+    }
+
+    i.fa.fa-font.black {
+        color: rgb(85,85,85);
+    }
+
     /*      Other       */
     #main-content.sidebar_shift {
         margin-left: 0px;
