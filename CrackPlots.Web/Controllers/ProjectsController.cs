@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace ForeSight.Web.Controllers
 {
+    [Authorize]
     [RoutePrefix("projects")]
     public class ProjectsController : BaseController
     {
