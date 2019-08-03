@@ -689,12 +689,9 @@
         }
 
         function _saveSceneSuccess(resp) {
-            //$.connection.hub.start().done(function () {
-            //    vm.projectHub.server.updateAct(vm.groupName, vm.act);
-            //});
-            if (vm.$window.innerWidth < 768) {
-                vm.$window.location.reload();
-            }
+            $.connection.hub.start().done(function () {
+                vm.projectHub.server.updateAct(vm.groupName, vm.act);
+            });
             vm.$rootScope.$broadcast('saving-finished');
         }
 

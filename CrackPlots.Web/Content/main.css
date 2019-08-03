@@ -7,10 +7,6 @@
         display: inline;
     }
 
-    #mobileSceneSelector {
-        display: none;
-    }
-
 
     a:hover {
         cursor: pointer;
@@ -514,6 +510,12 @@
     }
     .indexProjectHeaders {
         display: inline-block;
+    }
+    #sceneNavBar {
+        display:inline;
+    }
+    #mobileSceneSelector {
+        display: none;
     }
 }
 @media only screen and (min-width: 1200px) {

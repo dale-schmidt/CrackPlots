@@ -782,9 +782,6 @@
             $.connection.hub.start().done(function () {
                 vm.projectHub.server.updateAct(vm.groupName, vm.act);
             });
-            if (vm.$window.innerWidth < 768) {
-                vm.$window.location.reload();
-            }
             vm.$rootScope.$broadcast('saving-finished');
         }
 
