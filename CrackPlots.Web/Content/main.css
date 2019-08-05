@@ -153,6 +153,7 @@
     #homePagePanel {
         text-align: center;
         background-color: white;
+        max-width:100%;
     }
 
     #homeLogo {
