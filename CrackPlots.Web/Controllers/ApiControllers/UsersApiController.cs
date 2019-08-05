@@ -6,9 +6,11 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Sabio.Web.Requests;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -30,7 +32,7 @@ namespace ForeSight.Web.Controllers.ApiControllers
         //}
 
         [Route, HttpPost]
-        public HttpResponseMessage Add(UserAddRequest model)
+        public async Task<HttpResponseMessage> Add(UserAddRequest model)
         {
             if (!ModelState.IsValid)
             {
@@ -45,7 +47,7 @@ namespace ForeSight.Web.Controllers.ApiControllers
                 role.RoleId = 2;
                 AspNetUserRoleService.Post(role);
 
-                ItemResponse<SecurityToken> response = SendNewConfirmationEmail(model.Email, entityUser.Id);
+                SuccessResponse response = await SendNewConfirmationEmail(model.Email, entityUser.Id);
 
                 //PersonAddRequest person = new PersonAddRequest();
                 //ItemResponse<int> response = new ItemResponse<int>();
@@ -74,7 +76,7 @@ namespace ForeSight.Web.Controllers.ApiControllers
         //    return Request.CreateResponse(HttpStatusCode.OK, response);
         //}
 
-        private ItemResponse<SecurityToken> SendNewConfirmationEmail(string email, string id)
+        private async Task<SuccessResponse> SendNewConfirmationEmail(string email, string id)
         {
             SecurityTokenAddRequest securityTokenAddRequest = new SecurityTokenAddRequest();
 
@@ -85,16 +87,15 @@ namespace ForeSight.Web.Controllers.ApiControllers
             securityToken.TokenGuid = SecurityTokenService.Insert(securityTokenAddRequest);
             securityToken.AspNetUserId = id;
 
-            //ConfirmationEmailRequest emailRequest = new ConfirmationEmailRequest();
-            //emailRequest.FirstName = firstName;
-            //emailRequest.LastName = lastName;
-            //emailRequest.Email = email;
-            //emailRequest.SecurityToken = emailSecurityToken;
-            ////Removed static to enable DI
-            //await _emailService.ConfirmRegistration(emailRequest);
-            
-            ItemResponse<SecurityToken> response = new ItemResponse<SecurityToken>();
-            response.Item = securityToken;
+            StringBuilder UrlBuilder = new StringBuilder(ConfigurationManager.AppSettings.Get("BaseUrl"));
+            UrlBuilder.Append("/account/confirmemail?id=");
+            UrlBuilder.Append(securityToken.AspNetUserId);
+            UrlBuilder.Append("&token=");
+            UrlBuilder.Append(securityToken.TokenGuid);
+
+            await ExternalEmailService.ConfirmRegistration(UrlBuilder.ToString(), email);
+
+            SuccessResponse response = new SuccessResponse();
             return response;
         }
 
@@ -173,7 +174,7 @@ namespace ForeSight.Web.Controllers.ApiControllers
 
         [AllowAnonymous]
         [Route("forgotpassword/{email}"), HttpPost]
-        public HttpResponseMessage VerifyUser(String email)
+        public async Task<HttpResponseMessage> VerifyUser(String email)
         {
             if (!ModelState.IsValid)
             {
@@ -185,13 +186,13 @@ namespace ForeSight.Web.Controllers.ApiControllers
                 ErrorResponse er = new ErrorResponse("This email is not associated with an account.");
                 return Request.CreateResponse(HttpStatusCode.BadRequest, er);
             }
-            ItemResponse<Guid> response = SendResetPasswordEmail(email);
+            SuccessResponse response = await SendResetPasswordEmail(email);
 
             return Request.CreateResponse(HttpStatusCode.OK, response);
 
         }
 
-        private ItemResponse<Guid> SendResetPasswordEmail(String email)
+        private async Task<SuccessResponse> SendResetPasswordEmail(String email)
         {
             SecurityTokenAddRequest securityTokenAddRequest = new SecurityTokenAddRequest();
 
@@ -202,16 +203,13 @@ namespace ForeSight.Web.Controllers.ApiControllers
             securityToken.TokenGuid = SecurityTokenService.Insert(securityTokenAddRequest);
             securityToken.AspNetUserId = UserService.GetUser(email).Id;
 
-            //ConfirmationEmailRequest emailRequest = new ConfirmationEmailRequest();
-            //emailRequest.FirstName = firstName;
-            //emailRequest.LastName = lastName;
-            //emailRequest.Email = email;
-            //emailRequest.SecurityToken = emailSecurityToken;
-            ////Removed static to enable DI
-            //await _emailService.ConfirmRegistration(emailRequest);
+            StringBuilder UrlBuilder = new StringBuilder(ConfigurationManager.AppSettings.Get("BaseUrl"));
+            UrlBuilder.Append("/account/resetpassword/");
+            UrlBuilder.Append(securityToken.TokenGuid);
 
-            ItemResponse<Guid> response = new ItemResponse<Guid>();
-            response.Item = securityToken.TokenGuid;
+            await ExternalEmailService.ResetPassword(UrlBuilder.ToString(), email);
+
+            SuccessResponse response = new SuccessResponse();
             return response;
         }
         //[Route("resend/{guid:Guid}"), HttpPut]

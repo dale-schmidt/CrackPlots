@@ -260,3 +260,5 @@ paket-files/
 __pycache__/
 *.pyc
 /CrackPlots.Web/AppSettings.config
+/CrackPlots.Web/ConnectionStrings.config
+/CrackPlots.Web/WebSECRET.config

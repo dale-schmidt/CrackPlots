@@ -488,6 +488,9 @@
     .faqAnswer {
         padding: 0px 50px;
     }
+    .faqAnswer a {
+        text-decoration: underline;
+    }
 
     .faqLink {
         float: right;

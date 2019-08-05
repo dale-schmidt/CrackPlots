@@ -34,5 +34,10 @@ namespace ForeSight.Web.Controllers
             BaseViewModel model = new BaseViewModel();
             return View(model);
         }
+
+        public ActionResult HowTo()
+        {
+            return View();
+        }
     }
 }

@@ -63,6 +63,12 @@
     <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SendGrid, Version=9.11.0.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sendgrid.9.11.0\lib\net452\SendGrid.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -135,9 +141,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -284,6 +287,7 @@
     <Compile Include="Services\ActService.cs" />
     <Compile Include="Services\AspNetUserRoleService.cs" />
     <Compile Include="Services\CharacterService.cs" />
+    <Compile Include="Services\ExternalEmailService.cs" />
     <Compile Include="Services\ExceptionLoggingService.cs" />
     <Compile Include="Services\PersonService.cs" />
     <Compile Include="Services\ProjectPersonService.cs" />
@@ -633,6 +637,7 @@
     <Content Include="Assets\fonts\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="Assets\fonts\font-awesome\index.html" />
     <Content Include="Assets\fonts\index.html" />
+    <Content Include="Assets\images\addProjectExample.jpg" />
     <Content Include="Assets\images\apple-touch-icon-114-precomposed.png" />
     <Content Include="Assets\images\apple-touch-icon-144-precomposed.png" />
     <Content Include="Assets\images\apple-touch-icon-57-precomposed.png" />
@@ -640,6 +645,7 @@
     <Content Include="Assets\images\CP_logo.jpeg" />
     <Content Include="Assets\images\CP_logo_black.jpg" />
     <Content Include="Assets\images\CP_logo_white.JPG" />
+    <Content Include="Assets\images\editActExample.jpg" />
     <Content Include="Assets\images\favicon.png" />
     <Content Include="Assets\images\icons8-monitor-50.png" />
     <Content Include="Assets\images\icons8-monitor-64.png" />
@@ -648,6 +654,7 @@
     <Content Include="Assets\images\login-logo.png" />
     <Content Include="Assets\images\logo-folded.png" />
     <Content Include="Assets\images\logo.png" />
+    <Content Include="Assets\images\printProjectExample.jpg" />
     <Content Include="Assets\js\blo-dashboard.js" />
     <Content Include="Assets\js\chart-chartjs.js" />
     <Content Include="Assets\js\chart-easypie.js" />
@@ -2466,7 +2473,7 @@
     <Content Include="Scripts\angular-aria.min.js.map" />
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="Scripts\angular-sanitize.min.js.map" />
-    <Content Include="AppSettings.config" />
+    <Content Include="ConnectionStrings.config" />
     <Content Include="Content\flexboxgrid-6.3.1\.gitignore" />
     <Content Include="Content\flexboxgrid-6.3.1\bower.json" />
     <Content Include="Content\flexboxgrid-6.3.1\CNAME" />
@@ -2474,6 +2481,7 @@
     <Content Include="Content\flexboxgrid-6.3.1\LICENSE" />
     <Content Include="Content\flexboxgrid-6.3.1\package.json" />
     <Content Include="Content\flexboxgrid-6.3.1\README.md" />
+    <Content Include="WebSECRET.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Controllers\projectActController.js" />
     <Content Include="Scripts\Controllers\projectEditController.js" />
@@ -2543,6 +2551,7 @@
     <Content Include="Views\Projects\Episode.cshtml" />
     <Content Include="Views\Shared\_OutlineLayout.cshtml" />
     <Content Include="Views\Home\FAQ.cshtml" />
+    <Content Include="Views\Home\HowTo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
