@@ -498,6 +498,17 @@
         display: inline-block;
     }
 
+    /*      How To      */
+    .howToHr {
+        background-color: lightgrey;
+        height:1px;
+    }
+
+    /*  Footer   */
+    footer {
+        text-align:center;
+    }
+
     [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
         display: none !important;
     }

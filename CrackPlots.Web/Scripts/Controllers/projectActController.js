@@ -40,6 +40,7 @@
         vm.characterUpdateIndex = 0;
         vm.scene = null;
         vm.navButtonWidth = "";
+        vm.selectingScene = false;
         vm.add = {
             sequence: false,
             scene: false,
@@ -655,6 +656,7 @@
 
         // Scene Functions
         function _selectScene(sce, count) {
+            vm.selectingScene = true;
             if (vm.watches.scene.summary) {
                 _destroySceneWatches();
             }
@@ -844,11 +846,13 @@
         }
 
         function _debounceSaveScene(newVal, oldVal) {
-            if (newVal !== oldVal) {
+            if (newVal !== oldVal && !vm.selectingScene) {
                 if (vm.timeout.scene) {
                     vm.$timeout.cancel(vm.timeout.scene);
                 }
                 vm.timeout.scene = vm.$timeout(_liveSceneUpdates, 1000);
+            } else {
+                vm.selectingScene = false;
             }
         }
 

@@ -642,6 +642,7 @@
     <Content Include="Assets\images\apple-touch-icon-144-precomposed.png" />
     <Content Include="Assets\images\apple-touch-icon-57-precomposed.png" />
     <Content Include="Assets\images\apple-touch-icon-72-precomposed.png" />
+    <Content Include="Assets\images\collaborators example.jpg" />
     <Content Include="Assets\images\CP_logo.jpeg" />
     <Content Include="Assets\images\CP_logo_black.jpg" />
     <Content Include="Assets\images\CP_logo_white.JPG" />
@@ -655,6 +656,7 @@
     <Content Include="Assets\images\logo-folded.png" />
     <Content Include="Assets\images\logo.png" />
     <Content Include="Assets\images\printProjectExample.jpg" />
+    <Content Include="Assets\images\saved example.jpg" />
     <Content Include="Assets\js\blo-dashboard.js" />
     <Content Include="Assets\js\chart-chartjs.js" />
     <Content Include="Assets\js\chart-easypie.js" />
