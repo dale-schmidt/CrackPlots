@@ -247,6 +247,7 @@
         // SignalR functions
 
         function _broadcastAct(act) {
+            vm.selectingScene = true;
             var camelAct = _toCamel(act);
             if (camelAct.id === vm.act.id) {
                 var edit = {
@@ -284,6 +285,9 @@
                 vm.activeSequence = vm.sequenceUpdateIndex;
                 vm.activeScene = vm.sceneUpdateIndex;
             }
+            vm.$timeout(function () {
+                vm.selectingScene = false;
+            }, 0, false);
         }
 
         function _toCamel(o) {
@@ -669,6 +673,9 @@
             vm.selectedCharacterSceneExitType = null;
             vm.wordCount.sceneSummary = _wordCount(vm.scene.summary);
             _setSceneWatches();
+            vm.$timeout(function () {
+                vm.selectingScene = false;
+            }, 0, false);
         }
 
         function _setSceneWatches() {
@@ -681,6 +688,8 @@
                 vm.watches.scene.turn = vm.$scope.$watch('aVm.scene.turn', _debounceSaveScene);
                 vm.$scope.$watch('aVm.scene.setting', _debounceSaveScene);
                 vm.watches.scene.setting = vm.$scope.$watch('aVm.scene.setting', _debounceSaveScene);
+                vm.$scope.$watch('aVm.scene.summary', _debounceSaveScene);
+                vm.watches.scene.summary = vm.$scope.$watch('aVm.scene.summary', _debounceSaveScene);
             }
         }
 
@@ -851,8 +860,6 @@
                     vm.$timeout.cancel(vm.timeout.scene);
                 }
                 vm.timeout.scene = vm.$timeout(_liveSceneUpdates, 1000);
-            } else {
-                vm.selectingScene = false;
             }
         }
 
