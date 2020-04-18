@@ -1,0 +1,183 @@
+﻿
+@{
+    ViewBag.Title = "Macros";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<link href="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.css" rel="stylesheet">
+<script src="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.js"></script>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" />
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-offset-3 col-xs-6">
+            <div class="row">
+                <div class="col-xs-6">
+                    <label>Age</label>
+                    <input type="number" id="age" />
+                </div>
+                <div class="col-xs-6">
+                    <div class="mdc-form-field">
+                        <div class="mdc-radio">
+                            <input class="mdc-radio__native-control" type="radio" id="male" value="male" name="gender" checked>
+                            <div class="mdc-radio__background">
+                                <div class="mdc-radio__outer-circle"></div>
+                                <div class="mdc-radio__inner-circle"></div>
+                            </div>
+                            <div class="mdc-radio__ripple"></div>
+                        </div>
+                        <label for="male">Male</label>
+                        <div class="mdc-radio">
+                            <input class="mdc-radio__native-control" type="radio" id="female" value="female" name="gender">
+                            <div class="mdc-radio__background">
+                                <div class="mdc-radio__outer-circle"></div>
+                                <div class="mdc-radio__inner-circle"></div>
+                            </div>
+                            <div class="mdc-radio__ripple"></div>
+                        </div>
+                        <label for="female">Female</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <label>Weight (lbs.)</label>
+                    <input type="number" id="weight" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <label>Height (ft)</label>
+                    <input type="number" id="heightFt" />
+                </div>
+                <div class="col-xs-6">
+                    <label>(in)</label>
+                    <input type="number" id="heightIn" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <label>Activity Level</label>
+                    <select id="activityLevel">
+                        <option value="" disabled selected>Select a level</option>
+                        <option value="sedentary">Sedentary</option>
+                        <option value="light">Light Activity</option>
+                        <option value="moderate">Moderate Activity</option>
+                        <option value="high">High Activity</option>
+                    </select>
+                </div>
+                <div class="col-xs-6">
+                    <label>Goal</label>
+                    <select id="weightGoal">
+                        <option value="" disabled selected>Select a goal</option>
+                        <option value="lose">Lose weight</option>
+                        <option value="maintain">Maintain weight</option>
+                        <option value="gain">Gain weight</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <label>Body Type</label>
+                    <select id="bodyType">
+                        <option value="" disabled selected>Select a type</option>
+                        <option value="lean">Lean</option>
+                        <option value="moderate">Moderate</option>
+                        <option value="heavy">Heavy</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <button class="btn btn-primary" id="calculate">Calculate Macros</button>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-xs-12">
+                    <span>Daily Caloric Intake:</span> <span id="calories"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <span>Protein:</span> 
+                    <span id="protein"></span>
+                </div>
+                <div class="col-xs-4">
+                    <span>Fat:</span> 
+                    <span id="fat"></span>
+                </div>
+                <div class="col-xs-4">
+                    <span>Carbohydrates:</span> 
+                    <span id="carbs"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    var macroCalculator = {
+        functions: {},
+        variables: {}
+    };
+
+    macroCalculator.functions.calulateMacros = function () {
+        var weightKg = parseInt($("#weight").val()) / 2.205;
+        var heightCm = (parseInt($("#heightFt").val()) * 12 + parseInt($("#heightIn").val())) * 2.54;
+        var age = parseInt($("#age").val());
+        var calories = 10 * weightKg + 6.25 * heightCm - 5 * age;
+        if ($("input[name='gender']:checked").val() === 'male') {
+            calories += 5;
+        } else {
+            calories -= 161;
+        }
+        switch ($("#activityLevel").val()) {
+            case 'sedentary':
+                calories = calories * 1.2;
+                break;
+            case 'light':
+                calories = calories * 1.375;
+                break;
+            case 'moderate':
+                calories = calories * 1.55;
+                break;
+            case 'high':
+                calories = calories * 1.725;
+                break;
+            default:
+                break;
+        }
+        if ($("#weightGoal").val() === 'lose') {
+            calories = calories * 0.8;
+        } else if ($("#weightGoal").val() === 'gain') {
+            calories = calories * 1.2;
+        }
+        var protein;
+        switch ($("#bodyType").val()) {
+            case 'lean':
+                protein = weightKg * 2.205;
+                break;
+            case 'moderate':
+                protein = weightKg * 2.205 * 0.825;
+                break;
+            case 'heavy':
+                protein = weightKg * 2.205 * 0.65;
+                break;
+            default:
+                break;
+        }
+        var fat = calories * 0.25 / 9;
+        var carbs = (calories - protein * 4 - fat * 9) / 4;
+        $("#calories").text(Math.round(calories) + ' calories');
+        $("#protein").text(Math.round(protein) + 'g');
+        $("#fat").text(Math.round(fat) + 'g');
+        $("#carbs").text(Math.round(carbs) + 'g');
+    }
+
+    $(document).ready(function () {
+        $("#calculate").on('click', macroCalculator.functions.calulateMacros);
+    });
+</script>

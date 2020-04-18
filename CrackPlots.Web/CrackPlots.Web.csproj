@@ -233,6 +233,7 @@
     <Compile Include="Controllers\ApiControllers\UsersApiController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MacrosController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Domain\Act.cs" />
@@ -2554,6 +2555,7 @@
     <Content Include="Views\Shared\_OutlineLayout.cshtml" />
     <Content Include="Views\Home\FAQ.cshtml" />
     <Content Include="Views\Home\HowTo.cshtml" />
+    <Content Include="Views\Macros\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
